@@ -105,13 +105,13 @@ const ArticleCard = ({ newArticle,searchQuery }) => {
                 onClick={() => editArticle(article.id)}
                 className="edit-button"
               >
-                <CiEdit style={{fontSize:"20px"}}/>
+                <CiEdit style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
               </button>
               <button
                 onClick={() => deleteArticle(article.id)}
                 className="delete-button"
               >
-                <MdOutlineDelete style={{fontSize:"20px"}}/>
+                <MdOutlineDelete style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
               </button>
               </div>
             </div>

@@ -6,6 +6,7 @@ import CreateBlog from "./pages/CreateBlog";
 import EditArticle from "./components/EditArticle";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login"
+import Profile from "./pages/Profile";
 function App() {
   const [newArticle, setNewArticle] = useState(null);
 
@@ -43,6 +44,7 @@ function App() {
         <Route path="/edit-article/:id" element={<EditArticle onUpdate={handleUpdate} />} />
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
     </Router>
   );

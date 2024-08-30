@@ -33,6 +33,7 @@ const EditArticle = ({ onUpdate }) => {
   if (!article) return <div>Loading...</div>;
 
   return (
+    <>
     <div className="edit-article-container">
       <h2>Edit Article</h2>
       <form onSubmit={handleUpdate} className="edit-article-form">
@@ -67,6 +68,7 @@ const EditArticle = ({ onUpdate }) => {
         <button type="submit" className="save-button">Save Changes</button>
       </form>
     </div>
+    </>
   );
 };
 

@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { auth } from "../Firebase";
+import { Link,useNavigate} from "react-router-dom";
+import { auth, db } from "../Firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
 
-export default function Header({setSearchQuery}) {
-  const [dropDown,setDropDown]=useState(false);
+export default function Header({ setSearchQuery }) {
+  const [dropDown, setDropDown] = useState(false);
+  const [userDetails, setUserDetails] = useState("");
 
-  const toggleDropdown=()=>{
+  let navigate = useNavigate()
+
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        // Check if user is logged in
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
+          console.log(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } else {
+        console.log("User is not logged in");
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const toggleDropdown = () => {
     setDropDown(!dropDown);
+    // navigate('/profile')
   };
 
   const handleLogOut = async () => {
@@ -55,17 +84,21 @@ export default function Header({setSearchQuery}) {
               width: "450px",
             }}
           />
-         < CiSearch  style={{
-        position: "absolute",
-        top: "50%",
-        right: "10px",
-        transform: "translateY(-50%)",
-        color: "#817F75",
-        fontSize: "25px",
-      }}/>
+          <CiSearch
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "10px",
+              transform: "translateY(-50%)",
+              color: "#817F75",
+              fontSize: "25px",
+            }}
+          />
         </div>
       </div>
-      <div style={{display:"flex",gap:"10px",alignItems:"center"}}>
+
+
+      <div style={{ display: "flex", gap: "10px", alignItems: "center" ,cursor: "pointer",}}>
         <button
           style={{
             padding: "8px",
@@ -79,17 +112,19 @@ export default function Header({setSearchQuery}) {
         >
           Logout
         </button>
-        <div style={{
-          width:"40px",
-          height:"40px",
-          borderRadius:"50%",
-          backgroundImage:`url("download.png")`,
-          backgroundSize:"cover",
-        }}
-        onClick={toggleDropdown}>
-          
-          
-        </div>
+
+
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            backgroundImage: `url("download.png")`,
+            backgroundSize: "cover",
+          }}
+          onClick={toggleDropdown}
+        ></div>
+
         {dropDown && (
           <div
             style={{
@@ -105,7 +140,12 @@ export default function Header({setSearchQuery}) {
               textAlign: "center",
             }}
           >
-            <p style={{ margin: 0 }}>Welcome, pritam!</p>
+            {userDetails ? (
+              <p style={{ margin: 0 }}>Welcome, {userDetails.firstName}!</p>
+            ) : (
+              <p>Loading...</p>
+            )}
+           
           </div>
         )}
       </div>
