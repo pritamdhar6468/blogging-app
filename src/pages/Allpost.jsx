@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import ArticleCard from "../components/ArticleCard"
 import Featured from "../components/Featured";
 
-export default function Allpost({newArticle}) {
+export default function Allpost({newArticle,isAuth,setIsAuth}) {
   const [updatedArticle, setUpdatedArticle] = useState(null);
   const [searchQuery,setSearchQuery] = useState("");
 
@@ -18,7 +18,7 @@ export default function Allpost({newArticle}) {
   };
   return (
     <div>
-      <Header setSearchQuery={setSearchQuery} />
+      <Header isAuth={isAuth} setIsAuth={setIsAuth} setSearchQuery={setSearchQuery} />
       <div style={{ display: "flex" ,marginTop: "70px"}}>
         {/* <SideBar  /> */}
         <div style={{ display: "flex", width: "100%", paddingLeft: "150px",paddingRight:"150px" }}>

@@ -10,7 +10,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 
 
 
-export default function Header({ setSearchQuery }) {
+export default function Header({ setSearchQuery,isAuth}) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
 
@@ -79,13 +79,26 @@ export default function Header({ setSearchQuery }) {
 
       <div
         style={{
+          width:"100px",
           display: "flex",
-          
+          justifyContent:"space-between",
           alignItems: "center",
           cursor: "pointer",
         }}
       >
-        <div
+        {isAuth ?<Link to='/login'><button style={{padding:"5px",borderRadius:"5px",border:"2px solid #C6EBBE",cursor:"pointer"}}>LogIn</button></Link>:(
+             null
+        )}
+         
+        <div  style={{
+          display: "flex",
+          flexDirection:"column",
+          justifyContent:"space-evenly",
+          alignItems: "center",
+          
+          cursor: "pointer",
+        }}>
+          <div
           style={{
             width: "40px",
             height: "40px",
@@ -95,14 +108,6 @@ export default function Header({ setSearchQuery }) {
           }}
           onClick={toggleDropdown}
         ></div>
-        <div  style={{
-          display: "flex",
-          flexDirection:"column",
-          justifyContent:"space-evenly",
-          alignItems: "center",
-          
-          cursor: "pointer",
-        }}>
         {dropDown && (
           <div
             style={{

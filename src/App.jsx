@@ -60,11 +60,12 @@ function App() {
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />{" "}
         </Routes>
       ) : (
         <Routes>
-          <Route path="/" element={<Allpost newArticle={newArticle} />} />
+          
+          <Route path="/*" element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
       )}
     </Router>
