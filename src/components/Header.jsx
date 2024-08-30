@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
+import { IoCreateOutline } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
+
+
+
 
 export default function Header({ setSearchQuery }) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
 
-  let navigate = useNavigate()
+  let navigate = useNavigate();
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -58,8 +63,8 @@ export default function Header({ setSearchQuery }) {
         left: 0,
         width: "100%",
         zIndex: "1000",
-        paddingLeft: "70px",
-        paddingRight: "70px",
+        paddingLeft: "150px",
+        paddingRight: "150px",
         justifyContent: "space-between",
         alignItems: "center",
         height: "70px",
@@ -70,50 +75,16 @@ export default function Header({ setSearchQuery }) {
     >
       <div style={{ display: "flex", gap: "20px" }}>
         <h1 style={{ fontWeight: "bolder", color: "#C6EBBE" }}>Blogify</h1>
-        <div style={{ position: "relative" }}>
-          <input
-            type="search"
-            placeholder="Search..."
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: "10px 40px 10px 20px",
-              borderRadius: "20px",
-              border: "1px solid #C5D9E2",
-              fontSize: "16px",
-              outline: "none",
-              width: "450px",
-            }}
-          />
-          <CiSearch
-            style={{
-              position: "absolute",
-              top: "50%",
-              right: "10px",
-              transform: "translateY(-50%)",
-              color: "#817F75",
-              fontSize: "25px",
-            }}
-          />
-        </div>
       </div>
 
-
-      <div style={{ display: "flex", gap: "10px", alignItems: "center" ,cursor: "pointer",}}>
-        <button
-          style={{
-            padding: "8px",
-            background: "#C6EBBE",
-            border: "none",
-            borderRadius: "5px",
-            fontSize: "15px",
-            cursor: "pointer",
-          }}
-          onClick={handleLogOut}
-        >
-          Logout
-        </button>
-
-
+      <div
+        style={{
+          display: "flex",
+          
+          alignItems: "center",
+          cursor: "pointer",
+        }}
+      >
         <div
           style={{
             width: "40px",
@@ -124,7 +95,14 @@ export default function Header({ setSearchQuery }) {
           }}
           onClick={toggleDropdown}
         ></div>
-
+        <div  style={{
+          display: "flex",
+          flexDirection:"column",
+          justifyContent:"space-evenly",
+          alignItems: "center",
+          
+          cursor: "pointer",
+        }}>
         {dropDown && (
           <div
             style={{
@@ -135,9 +113,10 @@ export default function Header({ setSearchQuery }) {
               color: "#183446",
               borderRadius: "5px",
               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              padding: "10px",
+              padding: "30px",
               zIndex: "1001",
               textAlign: "center",
+              // gap:"10px"
             }}
           >
             {userDetails ? (
@@ -145,9 +124,39 @@ export default function Header({ setSearchQuery }) {
             ) : (
               <p>Loading...</p>
             )}
-           
+          <div >
+            <Link to="/create-blog">
+              <button  style={{
+                padding: "8px",
+                // background: "#",
+                marginTop:"5px",
+                border: "none",
+                borderRadius: "5px",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}><IoCreateOutline style={{fontSize:"25px"}}/>Create Blog</button>
+            </Link></div>
+            <div style={{alignItems:"center"}}>
+            <button
+              style={{
+                padding: "8px",
+                // background: "#",
+                marginTop:"5px",
+                border: "none",
+                borderRadius: "5px",
+                fontSize: "15px",
+                cursor: "pointer",
+              }}
+              onClick={handleLogOut}
+            >
+              <IoLogOutOutline style={{fontSize:"25px"}}/>
+              <p>Logout</p>
+            </button>
+            </div>
           </div>
+          
         )}
+        </div>
       </div>
     </div>
   );

@@ -3,9 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import "./ArticleCard.css";
 import { MdOutlineDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
+import { CiSearch } from "react-icons/ci";
 
 
-const ArticleCard = ({ newArticle,searchQuery }) => {
+
+const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
   const [articles, setArticles] = useState([]);
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
@@ -62,6 +64,31 @@ const ArticleCard = ({ newArticle,searchQuery }) => {
 
   return (
     <div>
+       <div style={{ position: "relative" , margin:"20px",display:"flex",justifyContent:"center"}}>
+          <input
+            type="search"
+            placeholder="Search..."
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              padding: "10px 40px 10px 30px",
+              borderRadius: "20px",
+              border: "2px solid #C5D9E2",
+              fontSize: "16px",
+              // outline: "none",
+              width: "900px",
+            }}
+          />
+          <CiSearch
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "10px",
+              transform: "translateY(-50%)",
+              color: "#817F75",
+              fontSize: "18px",
+            }}
+          />
+        </div>
       <h2 style={{margin:'20px'}}>Most Popular...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (

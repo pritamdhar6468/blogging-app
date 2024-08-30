@@ -16,6 +16,14 @@
     justify-content: center;
     padding: 15px;
   }
+  /* .login-container  div{
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  } */
   
   .login-form {
     background-color: #ffffff;
@@ -71,7 +79,7 @@
   }
   
   .signup-link span {
-    color: #f2f2f7;
+    color: #007bff;
     font-weight: bold;
   }
   
@@ -94,7 +102,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background-color: #38AECC;
+    background-color: #C0F5FA;
     font-family: 'Arial', sans-serif;
   }
   .signup-form-container h1{

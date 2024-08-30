@@ -90,6 +90,7 @@ const ArticleDetails = ({ newArticle }) => {
         ) : (
           <p>No comments yet. Be the first to comment!</p>
         )}
+        <h2>Leave a comment</h2>
         <form className="comment-form" onSubmit={handleCommentSubmit}>
           <textarea
             value={commentInput}

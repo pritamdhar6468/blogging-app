@@ -20,9 +20,9 @@ export default function Allpost({newArticle}) {
     <div>
       <Header setSearchQuery={setSearchQuery} />
       <div style={{ display: "flex" ,marginTop: "70px"}}>
-        <SideBar  />
-        <div style={{ display: "flex",marginLeft: "20%", width: "80%", padding: "20px" }}>
-          <div style={{ width: "75%" }}> <ArticleCard onUpdate={handleUpdate} newArticle={newArticle || updatedArticle} searchQuery={searchQuery} /></div>
+        {/* <SideBar  /> */}
+        <div style={{ display: "flex", width: "100%", paddingLeft: "150px",paddingRight:"150px" }}>
+          <div style={{ width: "75%" }}> <ArticleCard onUpdate={handleUpdate} newArticle={newArticle || updatedArticle} searchQuery={searchQuery} setSearchQuery={setSearchQuery} /></div>
           <div style={{ width: "24%" }}><Featured /></div>
         </div>
       </div>
