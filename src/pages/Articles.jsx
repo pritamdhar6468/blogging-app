@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./ArticleCard.css";
+import "../components/ArticleCard.css";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
 
@@ -9,7 +9,7 @@ import { CiSearch } from "react-icons/ci";
 
 
 
-const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
+const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
   const [articles, setArticles] = useState([]);
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
@@ -91,25 +91,9 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
             }}
           />
         </div>
-        <div style={
-          {padding: "10px 20px 10px 20px",}
-        }>
-            <Link to="/create-blog">
-              <button  style={{
-                padding: "8px",
-                background: "white",
-                border:"1px solid black",
-                color:"black",
-                marginTop:"5px",
-                // border: "none",
-                borderRadius: "5px",
-                fontSize: "1.7rem",
-                cursor: "pointer",
-               
-              }}><IoCreateOutline style={{fontSize:"1.7rem"}}/> {" "}Create Blog</button>
-            </Link></div>
+       
 
-      <h2 style={{margin:'20px',fontSize:"x-large"}}>Most Popular...</h2>
+      <h2 style={{margin:'20px',fontSize:"x-large"}}>All Post...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="card">
@@ -174,4 +158,4 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
   );
 };
 
-export default ArticleCard;
+export default Articles;

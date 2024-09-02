@@ -253,7 +253,12 @@
 }
 
 .create-blog form input[type="text"],
-.create-blog form textarea {
+.create-blog form input[type="url"],
+.create-blog form textarea,
+.create-blog form select  ,
+.create-blog form select option ,
+.create-blog form input[type="date"],
+.create-blog form input[type="time"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;

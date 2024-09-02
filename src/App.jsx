@@ -7,12 +7,14 @@ import EditArticle from "./components/EditArticle";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+// import Articles from "./pages/Articles";
 function App() {
   const [newArticle, setNewArticle] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuth");
+    console.log(authStatus)
     if (authStatus === "true") {
       setIsAuth(true);
     }
@@ -43,13 +45,14 @@ function App() {
 
   return (
     <Router>
-      {isAuth ? (
+      
         <Routes>
           <Route path="/" element={<Allpost newArticle={newArticle} />} />
           <Route
             path="/create-blog"
             element={<CreateBlog onPublish={handlePublish} />}
           />
+          {/* <Route path="/articles" element={<Articles  newArticle={newArticle } />}/> */}
           <Route
             path="/article/:id"
             element={<ArticleDetails newArticle={newArticle} />}
@@ -62,12 +65,8 @@ function App() {
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
           <Route path="/signup" element={<Signup />} />{" "}
         </Routes>
-      ) : (
-        <Routes>
-          
-          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-        </Routes>
-      )}
+       
+      
     </Router>
   );
 }

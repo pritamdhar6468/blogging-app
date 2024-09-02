@@ -47,12 +47,18 @@ const CreateBlog = ({ onPublish }) => {
           <textarea placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
           </div>
           <div className="flex-fields">
-            <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} required />
-            <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />
-            <input type="text" placeholder="Author" value={author} onChange={(e) => setAuthor(e.target.value)} required />
+            <input type="url" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} required />
+            <select type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required >
+              <option value="AI">AI</option>
+              <option value="Security">Security</option>
+              <option value="Startups">Startups</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Infrastructure">Infrastructure</option>
+            </select>
+            <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} required />
             <input type="text" placeholder="Author Pic URL" value={authorPic} onChange={(e) => setAuthorPic(e.target.value)} required />
-            <input type="text" placeholder="Published Date" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} required />
-            <input type="text" placeholder="Reading Time" value={readingTime} onChange={(e) => setReadingTime(e.target.value)} required />
+            <input type="date" placeholder="Published Date" value={publishedDate} onChange={(e) => setPublishedDate(e.target.value)} required />
+            <input type="time" placeholder="Reading Time" value={readingTime} onChange={(e) => setReadingTime(e.target.value)} required />
             <input type="text" placeholder="Tags (comma separated)" value={tags} onChange={(e) => setTags(e.target.value)} required />
           </div>
           <button type="submit">Publish</button>
