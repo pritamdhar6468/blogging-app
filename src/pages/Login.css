@@ -37,8 +37,9 @@
   .login-form label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
+    font-size: 1.8rem;
   }
   
   .login-form input {
@@ -60,8 +61,8 @@
     padding: 12px;
     background-color: #183446;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
+    font-size:1.9rem;
+    font-weight: 600;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -86,6 +87,7 @@
   .signup-link span a {
     text-decoration: none;
     color: inherit;
+    font-size: 1.5rem;
   }
   
   .signup-link span a:hover {
@@ -128,8 +130,9 @@
   
   .signup-form label {
     margin-bottom: 8px;
-    font-weight: bold;
+    font-weight: 600;
     color: #333;
+    font-size: 1.8rem;
   }
   
   .signup-form input {
@@ -152,8 +155,8 @@
     padding: 12px;
     background-color: #183446;
     color: #ffffff;
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 1.9rem;
+    font-weight: 600;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -167,7 +170,7 @@
   .signup-form-container p {
     margin-top: 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: 1.4rem;
   }
   
   .signup-form-container p span {
@@ -178,6 +181,7 @@
   .signup-form-container p span a {
     text-decoration: none;
     color: inherit;
+    font-size: 1.5rem;
   }
   
   .signup-form-container p span a:hover {

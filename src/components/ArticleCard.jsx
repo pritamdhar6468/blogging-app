@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./ArticleCard.css";
 import { MdOutlineDelete } from "react-icons/md";
+import { IoCreateOutline } from "react-icons/io5";
+
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 
@@ -89,7 +91,25 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
             }}
           />
         </div>
-      <h2 style={{margin:'20px'}}>Most Popular...</h2>
+        <div style={
+          {padding: "10px 20px 10px 20px",}
+        }>
+            <Link to="/create-blog">
+              <button  style={{
+                padding: "8px",
+                background: "white",
+                border:"1px solid black",
+                color:"black",
+                marginTop:"5px",
+                // border: "none",
+                borderRadius: "5px",
+                fontSize: "1.7rem",
+                cursor: "pointer",
+               
+              }}><IoCreateOutline style={{fontSize:"1.7rem"}}/> {" "}Create Blog</button>
+            </Link></div>
+
+      <h2 style={{margin:'20px',fontSize:"x-large"}}>Most Popular...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="card">
@@ -134,12 +154,12 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
               >
                 <CiEdit style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
               </button>
-              <button
+              {/* <button
                 onClick={() => deleteArticle(article.id)}
                 className="delete-button"
               >
                 <MdOutlineDelete style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
-              </button>
+              </button> */}
               </div>
             </div>
           </div>

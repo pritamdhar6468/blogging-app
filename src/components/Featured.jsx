@@ -21,13 +21,13 @@ const Featured = () => {
 
   return (
     <div>
-      <h2 style={{margin:'20px'}}>Featured</h2>
+      <h2 style={{margin:'20px',fontSize:"x-large"}}>Featured</h2>
       <div className="card-container">
         {securityArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="featured-card">
             <img src={article.image} alt={article.title} className="featured-card-image" />
             <div className="card-content">
-              <h2 className="featured-card-title">{article.title}</h2>
+            <Link to={`/article/${article.id}`} style={{textDecoration:"none",color:"black"}}><h2 className="featured-card-title">{article.title}</h2></Link> 
               <p className="card-category">{article.category}</p>
               <div className="card-author">
                 <img src={article.authorPic} alt={article.author} className="author-pic" />
@@ -35,9 +35,9 @@ const Featured = () => {
               </div>
               {/* <p className="card-date">{article.published_date}</p>
               <p className="card-reading-time">{article.reading_time}</p> */}
-              <Link to={`/article/${article.id}`} className="read-more-link">
+              {/* <Link to={`/article/${article.id}`} className="read-more-link">
                 Read More
-              </Link>
+              </Link> */}
               <div className="card-tags">
                 {article.tags.map((tag, index) => (
                   <span key={index} className="tag">{tag}</span>

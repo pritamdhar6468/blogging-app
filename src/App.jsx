@@ -65,7 +65,7 @@ function App() {
       ) : (
         <Routes>
           
-          <Route path="/*" element={<Login setIsAuth={setIsAuth} />} />
+          <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
         </Routes>
       )}
     </Router>

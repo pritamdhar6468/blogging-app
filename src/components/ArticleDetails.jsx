@@ -88,7 +88,7 @@ const ArticleDetails = ({ newArticle }) => {
             </div>
           ))
         ) : (
-          <p>No comments yet. Be the first to comment!</p>
+          <p style={{fontSize:"1.2rem"}}>No comments yet. Be the first to comment!</p>
         )}
         <h2>Leave a comment</h2>
         <form className="comment-form" onSubmit={handleCommentSubmit}>

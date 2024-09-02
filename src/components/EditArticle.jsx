@@ -35,7 +35,7 @@ const EditArticle = ({ onUpdate }) => {
   return (
     <>
     <div className="edit-article-container">
-      <h2>Edit Article</h2>
+      <h2 style={{fontSize:"2.5rem",fontWeight:"bold"}}>Edit Article</h2>
       <form onSubmit={handleUpdate} className="edit-article-form">
         <label>Title</label>
         <input 

@@ -42,8 +42,10 @@ const CreateBlog = ({ onPublish }) => {
       <div className="create-blog">
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>
+          <div>
           <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           <textarea placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
+          </div>
           <div className="flex-fields">
             <input type="text" placeholder="Image URL" value={image} onChange={(e) => setImage(e.target.value)} required />
             <input type="text" placeholder="Category" value={category} onChange={(e) => setCategory(e.target.value)} required />

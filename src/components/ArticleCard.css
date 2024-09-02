@@ -8,11 +8,12 @@
 
 .card {
     display: flex;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    /* border-radius: 8px; */
     overflow: hidden;
     width: 95%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     margin: 10px;
 }
 
@@ -27,13 +28,13 @@
 }
 
 .card-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.8rem;
+    font-weight: 500;
     margin: 0 0 8px;
 }
 
 .card-category {
-    font-size: 0.7rem;
+    font-size: 1.2rem;
     color: #007BFF;
     margin: 0 0 16px;
 }
@@ -42,6 +43,9 @@
     display: flex;
     align-items: center;
     margin: 0 0 8px;
+}
+.card-author p{
+  font-size: 1.3rem;
 }
 
 .author-pic {
@@ -52,13 +56,13 @@
 }
 
 .card-date, .card-reading-time {
-    font-size: 0.7rem;
+    font-size: 1.1rem;
     color: #555;
     margin: 0 0 8px;
 }
 
 .card-text {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     color: #333;
     margin: 0 0 8px;
 }
@@ -72,7 +76,7 @@
     background-color: #d0f3a4;
     border-radius: 4px;
     padding: 4px 8px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: #000000;
 }
 
@@ -93,7 +97,7 @@
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: white;
     background-color: #183446;
     border: none;
@@ -145,6 +149,7 @@
 .edit-article-container {
   max-width: 800px;
   margin: 0 auto;
+  margin-top: 2rem;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -157,9 +162,10 @@
 }
 
 .edit-article-form label {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 8px;
   color: #333;
+  font-size: 1.8rem;
 }
 
 .edit-article-form input,
@@ -199,10 +205,10 @@
 
 .featured-card{
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 5px;
     overflow: hidden;
     width: 95%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     margin: 10px;
 }
 
@@ -213,8 +219,8 @@
 }
 
 .featured-card-title {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin: 0 0 8px;
 }
 
@@ -224,9 +230,10 @@
 
 /* create-blog */
 .create-blog {
-  max-width: 800px;
+  max-width: 1200px;
   /* margin-top: 70px; */
-  margin: 80px auto;
+  margin: 100px auto;
+  
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
@@ -236,6 +243,7 @@
 .create-blog h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 2.5rem;
 }
 
 .create-blog form {
@@ -252,11 +260,12 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
+  font-size: 1.3rem;
 }
 
 .create-blog form textarea {
   grid-column: span 2;
-  height: 150px;
+  height: 360px;
   resize: vertical;
 }
 
@@ -274,6 +283,7 @@
   border-radius: 4px;
   cursor: pointer;
   align-self: center;
+  font-size: 1.6rem;
 }
 
 .create-blog form button:hover {
@@ -301,7 +311,8 @@
   }
   
   .article-details-title {
-    font-size: 2.5em;
+    font-size: 2.5rem;
+    font-weight: 500;
     margin-bottom: 20px;
     color: #333333;
     text-align: center;
@@ -328,19 +339,19 @@
   }
   
   .article-details-author p {
-    font-size: 1.2em;
+    font-size: 1.4rem;
     color: #555555;
   }
   
   .article-details-date,
   .article-details-reading-time {
-    font-size: 1em;
+    font-size: 1rem;
     color: #777777;
     margin-bottom: 10px;
   }
   
   .article-details-content {
-    font-size: 1.1em;
+    font-size: 1.8rem;
     line-height: 1.6;
     color: #444444;
     margin-bottom: 20px;
@@ -349,6 +360,7 @@
   .article-details-tags {
     display: flex;
     flex-wrap: wrap;
+    font-size: 1.4rem;
   }
   
   .article-details-tags span {
@@ -366,7 +378,7 @@
     margin: 80px auto;
     padding: 20px;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 8px;
     /* font-family: 'Arial', sans-serif; */
   }
@@ -374,7 +386,8 @@
   .comments-section h2 {
     display: flex;
     justify-content: flex-start;
-    font-size: 1.8em;
+    font-size: 2.1rem;
+    font-weight: 500;
     margin-bottom: 20px;
     color: #333333;
     font-weight: 500;
@@ -394,14 +407,14 @@
   }
   
   .comment p {
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     color: #282727;
     margin-bottom: 5px;
   }
   
   
   .comment span {
-    font-size: 0.7em;
+    font-size: 0.7rem;
     color: #888888;
   }
   
@@ -413,10 +426,10 @@
   
   .comment-input {
     padding: 7px;
-    font-size: 1em;
+    font-size: 1.6rem;
     border: none;
     border-bottom: 2px solid #cccccc;
-    border-radius: 0px;
+    /* border-radius: 0px; */
     resize: none;
     margin-bottom: 10px;
     width: 100%;
@@ -426,7 +439,7 @@
   .comment-button {
     align-self: flex-end;
     padding: 10px 20px;
-    font-size: 1.1em;
+    font-size: 1.6rem;
     color: #ffffff;
     background-color: #183446;
     border: none;

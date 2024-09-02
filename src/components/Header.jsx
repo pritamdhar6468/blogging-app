@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
-import { IoCreateOutline } from "react-icons/io5";
 import { IoLogOutOutline } from "react-icons/io5";
 
 
@@ -68,13 +67,13 @@ export default function Header({ setSearchQuery,isAuth}) {
         justifyContent: "space-between",
         alignItems: "center",
         height: "70px",
-        background: "#183446",
+        background: "#fafafa",
         color: "white",
         boxShadow: `0 4px 8px rgba(0, 0, 0, 0.1)`,
       }}
     >
       <div style={{ display: "flex", gap: "20px" }}>
-        <h1 style={{ fontWeight: "bolder", color: "#C6EBBE" }}>Blogify</h1>
+        <h1 style={{ fontSize:"3.2rem",fontWeight: "bolder", color: "#183446" }}>Blogify</h1>
       </div>
 
       <div
@@ -86,7 +85,7 @@ export default function Header({ setSearchQuery,isAuth}) {
           cursor: "pointer",
         }}
       >
-        {isAuth ?<Link to='/login'><button style={{padding:"5px",borderRadius:"5px",border:"2px solid #C6EBBE",cursor:"pointer"}}>LogIn</button></Link>:(
+        {!isAuth ?<Link to='/login'><button style={{padding:"5px",fontSize:"1.3rem",borderRadius:"5px", background:"#f9f9f9",border:"2px solid black",cursor:"pointer"}}>LogIn</button></Link>:(
              null
         )}
          
@@ -125,37 +124,28 @@ export default function Header({ setSearchQuery,isAuth}) {
             }}
           >
             {userDetails ? (
-              <p style={{ margin: 0 }}>Welcome, {userDetails.firstName}!</p>
+              <p style={{ fontSize:"2rem",margin: 0 }}>Welcome, {userDetails.firstName}!</p>
             ) : (
-              <p>Loading...</p>
+              <p style={{fontSize:"2rem"}}>Loading...</p>
             )}
-          <div >
-            <Link to="/create-blog">
-              <button  style={{
-                padding: "8px",
-                // background: "#",
-                marginTop:"5px",
-                border: "none",
-                borderRadius: "5px",
-                fontSize: "15px",
-                cursor: "pointer",
-              }}><IoCreateOutline style={{fontSize:"25px"}}/>Create Blog</button>
-            </Link></div>
-            <div style={{alignItems:"center"}}>
+          
+            <div style={{display:"flex"}}>
             <button
               style={{
                 padding: "8px",
-                // background: "#",
+                background: "black",
+                color:"white",
+                // width:"100px",
                 marginTop:"5px",
                 border: "none",
                 borderRadius: "5px",
-                fontSize: "15px",
+                fontSize: "1.7rem",
                 cursor: "pointer",
               }}
               onClick={handleLogOut}
             >
-              <IoLogOutOutline style={{fontSize:"25px"}}/>
-              <p>Logout</p>
+              <IoLogOutOutline style={{fontSize:"1.7rem"}}/>{" "}
+              Logout
             </button>
             </div>
           </div>

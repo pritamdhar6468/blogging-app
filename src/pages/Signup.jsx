@@ -40,7 +40,7 @@ const Signup = () => {
   return (
     <div className="signup-form-container">
       <div >
-      <h1>Sign Up</h1>
+      <h1 style={{fontSize:"2.9rem"}}>Sign Up</h1>
         <form onSubmit={handleSubmit} className="signup-form">
           <div>
             <label htmlFor="">First Name:</label>

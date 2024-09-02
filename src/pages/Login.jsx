@@ -26,7 +26,7 @@ const Login = ({ setIsAuth }) => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h1>Log In</h1>
+        <h1 style={{fontSize:"2.9rem"}}>Log In</h1>
         <label htmlFor="">Email:</label>
         <input
           type="email"
