@@ -4,7 +4,7 @@ import '../components/ArticleCard.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-const CreateBlog = ({ onPublish }) => {
+const CreateBlog = ({ onPublish ,isAuth}) => {
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
@@ -38,7 +38,7 @@ const CreateBlog = ({ onPublish }) => {
 
   return (
     <>
-      <Header/>
+      <Header isAuth={isAuth} />
       <div className="create-blog">
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>

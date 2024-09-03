@@ -142,6 +142,91 @@
   background-color: #68beb8;
 } */
 
+/* articles css  articles css  articles css  articles css */
+
+.articles-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+ /* max-width: 1300px; */
+
+}
+.articles-card {
+  /* display: flex; */
+  /* border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd; */
+  border-radius: 8px;
+  overflow: hidden;
+  /* width: 95%; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  
+  margin: 10px;
+}
+.articles-card-image {
+  /* width: 60%; */
+  object-fit: contain;
+  height: auto;
+}
+
+.articles-card-content {
+  padding: 16px;
+}
+
+.articles-card-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 8px;
+  
+}
+
+.articles-card-category {
+  font-size: 1.2rem;
+  color: #007BFF;
+  margin: 0 0 16px;
+}
+
+.articles-card-author {
+  display: flex;
+  align-items: center;
+  margin: 0 0 8px;
+}
+.articles-card-author p{
+font-size: 1.3rem;
+}
+
+.articles-author-pic {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.articles-card-date, .articles-card-reading-time {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0 0 8px;
+}
+
+.articles-card-text {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0 0 8px;
+}
+
+.articles-card-tags {
+  display: flex;
+  gap: 8px;
+}
+
+.articles-tag {
+  background-color: #d0f3a4;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 1.2rem;
+  color: #000000;
+}
 
 
 /* EditArticle.css  EditArticle.css EditArticle.css EditArticle.css EditArticle.css*/

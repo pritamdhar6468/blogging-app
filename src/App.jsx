@@ -7,10 +7,10 @@ import EditArticle from "./components/EditArticle";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-// import Articles from "./pages/Articles";
+import Articles from "./pages/Articles";
 function App() {
   const [newArticle, setNewArticle] = useState(null);
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuth");
@@ -50,16 +50,16 @@ function App() {
           <Route path="/" element={<Allpost newArticle={newArticle} />} />
           <Route
             path="/create-blog"
-            element={<CreateBlog onPublish={handlePublish} />}
+            element={<CreateBlog  isAuth={isAuth} onPublish={handlePublish} />}
           />
-          {/* <Route path="/articles" element={<Articles  newArticle={newArticle } />}/> */}
+          <Route path="/articles" element={<Articles isAuth={isAuth} newArticle={newArticle } />}/>
           <Route
             path="/article/:id"
-            element={<ArticleDetails newArticle={newArticle} />}
+            element={<ArticleDetails isAuth={isAuth} newArticle={newArticle} />}
           />
           <Route
             path="/edit-article/:id"
-            element={<EditArticle onUpdate={handleUpdate} />}
+            element={<EditArticle onUpdate={handleUpdate} isAuth={isAuth} />}
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />

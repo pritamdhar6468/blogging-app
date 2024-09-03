@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../components/ArticleCard.css";
+import Header from "../components/Header";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
 
@@ -9,11 +10,22 @@ import { CiSearch } from "react-icons/ci";
 
 
 
-const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
+const Articles = ({ newArticle,isAuth,setIsAuth }) => {
   const [articles, setArticles] = useState([]);
+  const [searchQuery,setSearchQuery] = useState("");
+
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
   let navigate = useNavigate();
+
+
+  // useEffect(() => {
+  //   const authStatus = localStorage.getItem("isAuth");
+  //   console.log(authStatus)
+  //   if (authStatus === "true") {
+  //     setIsAuth(true);
+  //   }
+  // }, []);
 
   // Add new article if provided
   useEffect(() => {
@@ -39,10 +51,10 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
     setVisibleCount((prevCount) => prevCount + 6); // Show 6 more articles on each click
   };
 
-  // const truncateContent = (content) => {
-  //   const words = content.split(" ");
-  //   return words.length > 20 ? words.slice(0, 20).join(" ") + "..." : content;
-  // };
+  const truncateContent = (content) => {
+    const words = content.split(" ");
+    return words.length > 8 ? words.slice(0, 8).join(" ") + "..." : content;
+  };
 
   // const deleteArticle = (id) => {
   //   const updatedArticles = articles.filter((article) => article.id !== id);
@@ -65,8 +77,11 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
   );
 
   return (
-    <div>
-       <div style={{ position: "relative" , margin:"20px",display:"flex",justifyContent:"center"}}>
+    <>
+    <Header isAuth={isAuth}/>
+    
+    <div style={{}}>
+       <div style={{ position: "relative" , marginTop:"90px",display:"flex",justifyContent:"center"}}>
           <input
             type="search"
             placeholder="Search..."
@@ -77,14 +92,15 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
               border: "2px solid #C5D9E2",
               fontSize: "16px",
               // outline: "none",
-              width: "900px",
+              width: "500px",
             }}
           />
           <CiSearch
             style={{
               position: "absolute",
               top: "50%",
-              left: "10px",
+              
+              left: "34.2%",
               transform: "translateY(-50%)",
               color: "#817F75",
               fontSize: "18px",
@@ -93,38 +109,38 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
         </div>
        
 
-      <h2 style={{margin:'20px',fontSize:"x-large"}}>All Post...</h2>
-      <div className="card-container">
+      <h2 style={{margin:'20px',paddingLeft:"70px",fontSize:"3.5rem"}}>All Post...</h2>
+      <div className="articles-card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
-          <div key={article.id} className="card">
+          <div key={article.id} className="articles-card">
             <img
               src={article.image}
               alt={article.title}
-              className="card-image"
+              className="articles-card-image"
             />
-            <div className="card-content">
+            <div className="articles-card-content">
               <Link to={`/article/${article.id}`} style={{textDecoration:"none",color:"black"}}>
-                <h2 className="card-title">{article.title}</h2>
+                <h2 className="articles-card-title">{truncateContent(article.title)}</h2>
               </Link>
-              <p className="card-category">{article.category}</p>
-              <div className="card-author">
+              <p className="articles-card-category">{article.category}</p>
+              <div className="articles-card-author">
                 <img
                   src={article.authorPic}
                   alt={article.author}
-                  className="author-pic"
+                  className="articles-author-pic"
                 />
                 <p>{article.author}</p>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p className="card-date">{article.published_date}</p>
-                <p className="card-reading-time">{article.reading_time}</p>
+                <p className="articles-card-date">{article.published_date}</p>
+                <p className="articles-card-reading-time">{article.reading_time}</p>
               </div>
 
               {/* <p className="card-text">{truncateContent(article.content)}</p> */}
               {/* <Link to={`/article/${article.id}`} className="read-more-link">
                 Read More
               </Link> */}
-              <div className="card-tags">
+              <div className="articles-card-tags">
                 {article.tags.map((tag, index) => (
                   <span key={index} className="tag">
                     {tag}
@@ -155,6 +171,7 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
         </button>
       )}
     </div>
+    </>
   );
 };
 
