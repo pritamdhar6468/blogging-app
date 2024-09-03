@@ -6,11 +6,13 @@ import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
 import { IoLogOutOutline } from "react-icons/io5";
 
-export default function Header({ setSearchQuery, isAuth, setIsAuth }) {
+export default function Header({  isAuth, setIsAuth }) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
 
   let navigate = useNavigate();
+
+  
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -32,10 +34,10 @@ export default function Header({ setSearchQuery, isAuth, setIsAuth }) {
   };
 
   useEffect(() => {
-    if (isAuth) {
+    
       fetchUserData();
-    }
-  }, [isAuth]);
+    
+  }, []);
 
   const toggleDropdown = () => {
     setDropDown(!dropDown);
@@ -47,7 +49,7 @@ export default function Header({ setSearchQuery, isAuth, setIsAuth }) {
       await auth.signOut();
       alert("user logging out");
       localStorage.removeItem("isAuth");
-      setIsAuth(false);
+      // setIsAuth(false);
       window.location.href = "/login";
       console.log("logged out sucessfully");
     } catch (error) {
@@ -107,7 +109,7 @@ export default function Header({ setSearchQuery, isAuth, setIsAuth }) {
           </div>
         </Link>
 
-        {isAuth && isAuth ? (
+        { isAuth ? (
           <div
             style={{
               width: "40px",

@@ -39,26 +39,26 @@ const Articles = ({ newArticle,searchQuery,setSearchQuery }) => {
     setVisibleCount((prevCount) => prevCount + 6); // Show 6 more articles on each click
   };
 
-  const truncateContent = (content) => {
-    const words = content.split(" ");
-    return words.length > 20 ? words.slice(0, 20).join(" ") + "..." : content;
-  };
+  // const truncateContent = (content) => {
+  //   const words = content.split(" ");
+  //   return words.length > 20 ? words.slice(0, 20).join(" ") + "..." : content;
+  // };
 
-  const deleteArticle = (id) => {
-    const updatedArticles = articles.filter((article) => article.id !== id);
-    setArticles(updatedArticles);
+  // const deleteArticle = (id) => {
+  //   const updatedArticles = articles.filter((article) => article.id !== id);
+  //   setArticles(updatedArticles);
 
-    // Update localStorage if the deleted article was newly added
-    const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
-    const updatedSavedArticles = savedArticles.filter(
-      (article) => article.id !== id
-    );
-    localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
-  };
+  //   // Update localStorage if the deleted article was newly added
+  //   const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
+  //   const updatedSavedArticles = savedArticles.filter(
+  //     (article) => article.id !== id
+  //   );
+  //   localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
+  // };
 
-  const editArticle = (id) => {
-    navigate(`/edit-article/${id}`);
-  };
+  // const editArticle = (id) => {
+  //   navigate(`/edit-article/${id}`);
+  // };
 
   const filteredArticles = articles.filter((article)=>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())

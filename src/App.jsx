@@ -10,15 +10,15 @@ import Profile from "./pages/Profile";
 // import Articles from "./pages/Articles";
 function App() {
   const [newArticle, setNewArticle] = useState(null);
-  const [isAuth, setIsAuth] = useState(false);
+  // const [isAuth, setIsAuth] = useState(true);
 
-  useEffect(() => {
-    const authStatus = localStorage.getItem("isAuth");
-    console.log(authStatus)
-    if (authStatus === "true") {
-      setIsAuth(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const authStatus = localStorage.getItem("isAuth");
+  //   console.log(authStatus)
+  //   if (authStatus === "true") {
+  //     setIsAuth(true);
+  //   }
+  // }, []);
 
   useEffect(() => {
     // Retrieve any saved articles from localStorage on load

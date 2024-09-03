@@ -1,14 +1,23 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Header from "../components/Header";
 import SideBar from "../components/SideBar";
 import Footer from "../components/Footer";
 import ArticleCard from "../components/ArticleCard"
 import Featured from "../components/Featured";
 
-export default function Allpost({newArticle,isAuth,setIsAuth}) {
+export default function Allpost({newArticle}) {
   const [updatedArticle, setUpdatedArticle] = useState(null);
   const [searchQuery,setSearchQuery] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuth");
+    console.log(authStatus)
+    if (authStatus === "true") {
+      setIsAuth(true);
+    }
+  }, []);
 
   const handleUpdate = (article) => {
     setUpdatedArticle(article);
