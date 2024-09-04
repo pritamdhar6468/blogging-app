@@ -93,7 +93,7 @@ export default function Header({ isAuth, setIsAuth }) {
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <div
             style={{
-              padding: "5px",
+              padding: "6px",
               fontSize: "1.5rem",
 
               // borderRadius: "5px",
