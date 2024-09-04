@@ -61,7 +61,7 @@ function App() {
             path="/edit-article/:id"
             element={<EditArticle onUpdate={handleUpdate} isAuth={isAuth} />}
           />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile isAuth={isAuth} />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
           <Route path="/signup" element={<Signup />} />{" "}
         </Routes>
