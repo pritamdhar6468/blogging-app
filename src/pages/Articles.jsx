@@ -80,13 +80,14 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
     <>
     <Header isAuth={isAuth}/>
     
-    <div style={{}}>
+    <div style={{display:"flex",flexDirection:"column", alignItems:"center"}}>
        <div style={{ position: "relative" , marginTop:"90px",display:"flex",justifyContent:"center"}}>
           <input
             type="search"
             placeholder="Search..."
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
+              position: "relative" ,
               padding: "10px 40px 10px 30px",
               borderRadius: "20px",
               border: "2px solid #C5D9E2",
@@ -99,8 +100,7 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
             style={{
               position: "absolute",
               top: "50%",
-              
-              left: "34.2%",
+              left: "2%",
               transform: "translateY(-50%)",
               color: "#817F75",
               fontSize: "18px",
@@ -109,7 +109,7 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
         </div>
        
 
-      <h2 style={{margin:'20px',paddingLeft:"70px",fontSize:"3.5rem"}}>All Post...</h2>
+      <h2 style={{maxWidth:"70%",margin:'20px',fontSize:"3.5rem"}}>All Post...</h2>
       <div className="articles-card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="articles-card">

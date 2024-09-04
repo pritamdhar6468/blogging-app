@@ -43,7 +43,7 @@ const CreateBlog = ({ onPublish ,isAuth}) => {
         <h2>Create a New Blog Post</h2>
         <form onSubmit={handleSubmit}>
           <div>
-          <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
+          <input  className="input-tag" type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
           <textarea placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)} required></textarea>
           </div>
           <div className="flex-fields">

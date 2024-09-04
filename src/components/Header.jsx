@@ -5,14 +5,13 @@ import { auth, db } from "../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
 import { IoLogOutOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
-export default function Header({  isAuth, setIsAuth }) {
+export default function Header({ isAuth, setIsAuth }) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
 
   let navigate = useNavigate();
-
-  
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {
@@ -34,9 +33,7 @@ export default function Header({  isAuth, setIsAuth }) {
   };
 
   useEffect(() => {
-    
-      fetchUserData();
-    
+    fetchUserData();
   }, []);
 
   const toggleDropdown = () => {
@@ -87,29 +84,64 @@ export default function Header({  isAuth, setIsAuth }) {
         style={{
           // width:"100px",
           display: "flex",
-          justifyContent:"space-between",
+          justifyContent: "space-between",
           alignItems: "center",
-          gap:"2rem",
+          gap: "2rem",
           cursor: "pointer",
         }}
       >
-        <Link to="/articles" style={{textDecoration:"none",color:"black",}}>
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <div
             style={{
               padding: "5px",
               fontSize: "1.5rem",
-              
+
               // borderRadius: "5px",
               // background: "#f9f9f9",
               // border: "2px solid black",
               cursor: "pointer",
             }}
           >
-             Articles
+            Home
           </div>
         </Link>
 
-        { isAuth ? (
+        <Link to="/articles" style={{ textDecoration: "none", color: "black" }}>
+          <div
+            style={{
+              padding: "5px",
+              fontSize: "1.5rem",
+
+              // borderRadius: "5px",
+              // background: "#f9f9f9",
+              // border: "2px solid black",
+              cursor: "pointer",
+            }}
+          >
+            Blogs
+          </div>
+        </Link>
+
+        <Link
+          to="/create-blog"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <div
+            style={{
+              padding: "5px",
+              fontSize: "1.5rem",
+
+              // borderRadius: "5px",
+              // background: "#f9f9f9",
+              // border: "2px solid black",
+              cursor: "pointer",
+            }}
+          >
+            Create Blog
+          </div>
+        </Link>
+
+        {isAuth ? (
           <div
             style={{
               width: "40px",
@@ -164,29 +196,62 @@ export default function Header({  isAuth, setIsAuth }) {
               }}
             >
               {userDetails ? (
-                <p style={{ fontSize: "2rem", margin: 0 }}>
+                <p style={{ fontSize: "1.6rem", margin: 0 }}>
                   Welcome, {userDetails.firstName}!
                 </p>
               ) : (
-                <p style={{ fontSize: "2rem" }}>Loading...</p>
+                <p style={{ fontSize: "1.6rem" }}>Loading...</p>
               )}
+
+              <Link
+                to="/profile"
+                style={{ display: "flex", textDecoration: "none" }}
+              >
+                <button
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    padding: "8px",
+                    background: "white",
+                    color: "black",
+                    // width:"100px",
+                    marginTop: "5px",
+
+                    border: "none",
+                    borderRadius: "5px",
+                    fontSize: "1.5rem",
+                    cursor: "pointer",
+                  }}
+                >
+                  <CgProfile
+                    style={{ fontSize: "2.5rem", marginRight: "10px" }}
+                  />
+                  <span style={{ fontSize: "2rem" }}>Profile</span>
+                </button>
+              </Link>
 
               <div style={{ display: "flex" }}>
                 <button
                   style={{
+                    display: "flex",
+                    justifyContent: "center",
                     padding: "8px",
-                    background: "black",
+                    background: "#ed3b2b",
                     color: "white",
                     // width:"100px",
                     marginTop: "5px",
+                    marginLeft: "7px",
                     border: "none",
                     borderRadius: "5px",
-                    fontSize: "1.7rem",
+                    // fontSize: "1.5rem",
                     cursor: "pointer",
                   }}
                   onClick={handleLogOut}
                 >
-                  <IoLogOutOutline style={{ fontSize: "1.7rem" }} /> Logout
+                  <IoLogOutOutline
+                    style={{ fontSize: "2rem", marginRight: "10px" }}
+                  />{" "}
+                  <span style={{ fontSize: "1.4rem" }}>Logout</span>
                 </button>
               </div>
             </div>
