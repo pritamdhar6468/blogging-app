@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useRef} from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
@@ -11,6 +11,8 @@ export default function Header({ isAuth, setIsAuth }) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
 
+  const profileRef = useRef(null);
+  const dropdownRef = useRef(null);
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -53,6 +55,28 @@ export default function Header({ isAuth, setIsAuth }) {
       console.log(error.message);
     }
   };
+
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if click happened outside both pro div and dropdown
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setDropDown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileRef, dropdownRef]);
+
   return (
     <div
       style={{
@@ -142,16 +166,32 @@ export default function Header({ isAuth, setIsAuth }) {
         </Link>
 
         {isAuth ? (
-          <div
-            style={{
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              backgroundImage: `url("download.png")`,
-              backgroundSize: "cover",
-            }}
-            onClick={toggleDropdown}
-          ></div>
+        <div
+        ref={profileRef}
+        style={{
+          width: "40px",
+          height: "40px",
+          borderRadius: "50%",
+          backgroundImage: userDetails.profileImageUrl
+            ? `url(${userDetails.profileImageUrl})`
+            : "none",
+          backgroundColor: "#183446", // Fallback color if no profile image
+          backgroundSize: "cover",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "1.6rem",
+          color: "white",
+          fontWeight: "bold",
+        }}
+        onClick={toggleDropdown}
+      >
+        {userDetails.profileImageUrl
+          ? ""
+          : userDetails.firstName
+          ? userDetails.firstName.charAt(0)
+          : ""}
+      </div>
         ) : (
           <Link to="/login">
             <button
@@ -180,21 +220,27 @@ export default function Header({ isAuth, setIsAuth }) {
           }}
         >
           {dropDown && (
-            <div
-              style={{
-                position: "absolute",
-                top: "60px",
-                right: "0",
-                backgroundColor: "#ffffff",
-                color: "#183446",
-                borderRadius: "5px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                padding: "30px",
-                zIndex: "1001",
-                textAlign: "center",
-                // gap:"10px"
-              }}
-            >
+             <div
+            ref={dropdownRef} // Assign ref to the dropdown div
+            style={{
+              position: "absolute",
+              top: "60px",
+              right: "0",
+              backgroundColor: "#ffffff",
+              color: "#183446",
+              borderRadius: "5px",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              padding: "30px",
+              zIndex: "1001",
+              textAlign: "center",
+              opacity: dropDown ? 1 : 0, // Controls visibility
+              transform: dropDown
+                ? "translateY(0)"
+                : "translateY(-10px)", // Controls slide effect
+              transition: "opacity 0.5s ease, transform 0.5s ease", // Smooth transition
+              pointerEvents: dropDown ? "auto" : "none", // Disable clicks when hidden
+            }}
+          >
               {userDetails ? (
                 <p style={{ fontSize: "1.6rem", margin: 0 }}>
                   Welcome, {userDetails.firstName}!
