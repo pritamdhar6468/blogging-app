@@ -9,7 +9,7 @@ import { CiSearch } from "react-icons/ci";
 
 
 
-const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
+const ArticleCard = ({ newArticle,searchQuery,setSearchQuery,isAuth }) => {
   const [articles, setArticles] = useState([]);
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
@@ -91,23 +91,32 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery }) => {
             }}
           />
         </div>
-        <div style={
-          {padding: "10px 20px 10px 20px",}
-        }>
-            <Link to="/create-blog">
-              <button  style={{
-                padding: "8px",
-                background: "white",
-                border:"1px solid black",
-                color:"black",
-                marginTop:"5px",
-                // border: "none",
-                borderRadius: "5px",
-                fontSize: "1.7rem",
-                cursor: "pointer",
-               
-              }}><IoCreateOutline style={{fontSize:"1.7rem"}}/> {" "}Create Blog</button>
-            </Link></div>
+
+
+        {
+          isAuth?(
+            <div style={
+              {padding: "10px 20px 10px 20px",}
+            }>
+                <Link to="/create-blog">
+                  <button  style={{
+                    padding: "8px",
+                    background: "white",
+                    border:"1px solid black",
+                    color:"black",
+                    marginTop:"5px",
+                    // border: "none",
+                    borderRadius: "5px",
+                    fontSize: "1.7rem",
+                    cursor: "pointer",
+                   
+                  }}><IoCreateOutline style={{fontSize:"1.7rem"}}/> {" "}Create Blog</button>
+                </Link></div>
+          ):(
+           null
+          )
+        }
+       
 
       <h2 style={{margin:'20px',fontSize:"x-large"}}>Most Popular...</h2>
       <div className="card-container">

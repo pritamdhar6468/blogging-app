@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { auth, db } from "../Firebase";
+import { doc, getDoc } from "firebase/firestore";
 import "./ArticleCard.css";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -9,6 +11,7 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
   const [article, setArticle] = useState(null);
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
+  const [userDetails, setUserDetails] = useState("");
 
   useEffect(() => {
     if (newArticle && newArticle.id === parseInt(id)) {
@@ -44,6 +47,28 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
       JSON.parse(localStorage.getItem(`comments-${id}`)) || [];
     setComments(savedComments);
   }, [id]);
+
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
+          console.log(docSnap.data());
+        } else {
+          console.log("No such document!");
+        }
+      } else {
+        console.log("User is not logged in");
+      }
+    });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();
@@ -92,27 +117,69 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
         {comments.length > 0 ? (
           comments.map((comment) => (
             <div key={comment.id} className="comment">
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+              >
+                <div
+                  // ref={profileRef}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                    backgroundImage: userDetails.profileImageUrl
+                      ? `url(${userDetails.profileImageUrl})`
+                      : "none",
+                    backgroundColor: "#183446", // Fallback color if no profile image
+                    backgroundSize: "cover",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "1.6rem",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {userDetails.profileImageUrl
+                    ? ""
+                    : userDetails.firstName
+                    ? userDetails.firstName.charAt(0)
+                    : ""}
+                </div>{" "}
+                <p>
+                  {userDetails.firstName} {userDetails.lastName}
+                </p>
+              </div>
               <p>{comment.text}</p>
               <span>{comment.date}</span>
             </div>
           ))
         ) : (
-          <p style={{ fontSize: "1.2rem" }}>
+          <p style={{ fontSize: "1rem" }}>
             No comments yet. Be the first to comment!
           </p>
         )}
-        <h2>Leave a comment</h2>
-        <form className="comment-form" onSubmit={handleCommentSubmit}>
-          <textarea
-            value={commentInput}
-            onChange={(e) => setCommentInput(e.target.value)}
-            placeholder="Add a comment..."
-            className="comment-input"
-          />
-          <button type="submit" className="comment-button">
-            Post Comment
-          </button>
-        </form>
+
+        {isAuth ? (
+          <>
+            <h2>Leave a comment</h2>
+            <form className="comment-form" onSubmit={handleCommentSubmit}>
+              <textarea
+                value={commentInput}
+                onChange={(e) => setCommentInput(e.target.value)}
+                placeholder="Add a comment..."
+                className="comment-input"
+              />
+              <button type="submit" className="comment-button">
+                Post Comment
+              </button>
+            </form>
+          </>
+        ) : (
+          <>
+            <h2>You need to log in to make a comment</h2>
+           
+          </>
+        )}
       </div>
 
       {/* <Footer/> */}

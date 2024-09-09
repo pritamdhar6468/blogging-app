@@ -146,24 +146,49 @@ export default function Header({ isAuth, setIsAuth }) {
           </div>
         </Link>
 
-        <Link
-          to="/create-blog"
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <div
-            style={{
-              padding: "5px",
-              fontSize: "1.5rem",
 
-              // borderRadius: "5px",
-              // background: "#f9f9f9",
-              // border: "2px solid black",
-              cursor: "pointer",
-            }}
-          >
-            Create Blog
-          </div>
-        </Link>
+          {
+            isAuth?(
+              <Link
+              to="/create-blog"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div
+                style={{
+                  padding: "5px",
+                  fontSize: "1.5rem",
+    
+                  // borderRadius: "5px",
+                  // background: "#f9f9f9",
+                  // border: "2px solid black",
+                  cursor: "pointer",
+                }}
+              >
+                Create Blog
+              </div>
+            </Link>
+            ):(
+              <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <div
+                style={{
+                  padding: "5px",
+                  fontSize: "1.5rem",
+    
+                  // borderRadius: "5px",
+                  // background: "#f9f9f9",
+                  // border: "2px solid black",
+                  cursor: "pointer",
+                }}
+              >
+                Create Blog
+              </div>
+            </Link>
+            )
+          }
+       
 
         {isAuth ? (
         <div

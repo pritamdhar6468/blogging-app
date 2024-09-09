@@ -31,7 +31,7 @@ export default function Allpost({newArticle}) {
       <div style={{ display: "flex" ,marginTop: "70px"}}>
         {/* <SideBar  /> */}
         <div style={{ display: "flex", width: "100%", paddingLeft: "150px",paddingRight:"150px" }}>
-          <div style={{ width: "75%" }}> <ArticleCard onUpdate={handleUpdate} newArticle={newArticle || updatedArticle} searchQuery={searchQuery} setSearchQuery={setSearchQuery} /></div>
+          <div style={{ width: "75%" }}> <ArticleCard onUpdate={handleUpdate} isAuth={isAuth} newArticle={newArticle || updatedArticle} searchQuery={searchQuery} setSearchQuery={setSearchQuery} /></div>
           <div style={{ width: "24%" }}><Featured /></div>
         </div>
       </div>
