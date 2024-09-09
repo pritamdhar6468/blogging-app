@@ -54,10 +54,10 @@ function App() {
       
         <Routes>
           <Route path="/" element={<Allpost newArticle={newArticle} />} />
-          <Route
+          {isAuth?(<Route
             path="/create-blog"
             element={<CreateBlog  isAuth={isAuth} onPublish={handlePublish} />}
-          />
+          />):null}
           <Route path="/articles" element={<Articles isAuth={isAuth} newArticle={newArticle } />}/>
           <Route
             path="/article/:id"
@@ -70,6 +70,8 @@ function App() {
           <Route path="/profile" element={<Profile isAuth={isAuth} />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
           <Route path="/signup" element={<Signup />} />{" "}
+
+          <Route path="/error" element={<Error/>}/>
         </Routes>
        
       

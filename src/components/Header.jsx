@@ -13,9 +13,11 @@ import "react-toastify/dist/ReactToastify.css";
 export default function Header({ isAuth, setIsAuth }) {
   const [dropDown, setDropDown] = useState(false);
   const [userDetails, setUserDetails] = useState("");
+  const [showLogoutModal,setShowLogoutModal] = useState(false)
 
   const profileRef = useRef(null);
   const dropdownRef = useRef(null);
+  const logoutRef = useRef(null);
   let navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -66,9 +68,11 @@ export default function Header({ isAuth, setIsAuth }) {
   };
 
   const handleLogOut = async () => {
+    // e.preventDefault();
+
     try {
       await auth.signOut();
-      alert("user logging out");
+      // alert("user logging out");
       localStorage.removeItem("isAuth");
       // setIsAuth(false);
       window.location.href = "/login";
@@ -77,6 +81,23 @@ export default function Header({ isAuth, setIsAuth }) {
       console.log(error.message);
     }
   };
+
+
+
+  const openLogoutModal = () => {
+    setShowLogoutModal(true); 
+  };
+
+  const closeLogoutModal = () => {
+    setShowLogoutModal(false); 
+  };
+
+  const confirmLogout = () => {
+    handleLogOut();
+    closeLogoutModal();
+  };
+
+
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -87,16 +108,21 @@ export default function Header({ isAuth, setIsAuth }) {
         !profileRef.current.contains(event.target) &&
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target)
+        
       ) {
         setDropDown(false);
       }
+       if( logoutRef.current&&
+         !logoutRef.current.contains(event.target)){
+         setShowLogoutModal(false);
+         }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [profileRef, dropdownRef]);
+  }, [profileRef, dropdownRef,logoutRef]);
 
   return (
     <>
@@ -304,13 +330,13 @@ export default function Header({ isAuth, setIsAuth }) {
               ref={dropdownRef} // Assign ref to the dropdown div
               style={{
                 position: "absolute",
-                top: "60px",
-                right: "0",
+                top: "50px",
+                right: "40px",
                 backgroundColor: "#ffffff",
                 color: "#183446",
                 borderRadius: "5px",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                padding: "30px",
+                padding: "15px",
                 zIndex: "1001",
                 textAlign: "center",
                 opacity: dropDown ? 1 : 0, // Controls visibility
@@ -320,7 +346,7 @@ export default function Header({ isAuth, setIsAuth }) {
               }}
             >
               {userDetails ? (
-                <p style={{ fontSize: "1.6rem", margin: 0 }}>
+                <p style={{ fontSize: "1.3rem", margin: 0 }}>
                   Welcome, {userDetails.firstName}!
                 </p>
               ) : (
@@ -331,7 +357,7 @@ export default function Header({ isAuth, setIsAuth }) {
                 to="/profile"
                 style={{ display: "flex", textDecoration: "none" }}
               >
-                <button
+                <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -343,19 +369,19 @@ export default function Header({ isAuth, setIsAuth }) {
 
                     border: "none",
                     borderRadius: "5px",
-                    fontSize: "1.5rem",
+                    // fontSize: "1.5rem",
                     cursor: "pointer",
                   }}
                 >
                   <CgProfile
-                    style={{ fontSize: "2.5rem", marginRight: "10px" }}
+                    style={{ fontSize: "2.2rem", marginRight: "10px" }}
                   />
-                  <span style={{ fontSize: "2rem" }}>Profile</span>
-                </button>
+                  <span style={{ fontSize: "1.4rem" }}>Profile</span>
+                </div>
               </Link>
 
               <div style={{ display: "flex" }}>
-                <button
+                <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -370,18 +396,71 @@ export default function Header({ isAuth, setIsAuth }) {
                     // fontSize: "1.5rem",
                     cursor: "pointer",
                   }}
-                  onClick={handleLogOut}
+                  onClick={openLogoutModal}
                 >
                   <IoLogOutOutline
-                    style={{ fontSize: "2rem", marginRight: "10px" }}
+                    style={{ fontSize: "1.8rem", marginRight: "10px" }}
                   />{" "}
-                  <span style={{ fontSize: "1.4rem" }}>Logout</span>
-                </button>
+                  <span style={{ fontSize: "1.2rem" }}>Logout</span>
+                </div>
               </div>
             </div>
           )}
         </div>
       </div>
+
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutModal && (
+        <div
+        ref={logoutRef}
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            padding: "20px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            borderRadius: "10px",
+            zIndex: "1002",
+            textAlign: "center",
+          }}
+        >
+          <p style={{ fontSize: "1.5rem", marginBottom: "15px",color:"black" }}>
+            Are you sure you want to logout?
+          </p>
+          <button
+            style={{
+              marginRight: "10px",
+              padding: "10px",
+              background: "#ed3b2b",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize:"1.3rem"
+            }}
+            onClick={confirmLogout}
+          >
+            Yes
+          </button>
+          <button
+            style={{
+              padding: "10px",
+              background: "grey",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+              fontSize:"1.3rem"
+            }}
+            onClick={closeLogoutModal}
+          >
+            No
+          </button>
+        </div>
+      )}
       
     </div>
     <ToastContainer /></>

@@ -81,6 +81,7 @@ const Profile = ({ isAuth }) => {
             <div className="profile-category-active">Home</div>
             <div className="profile-category-active">About</div>
           </div>
+          <div>juytyuy</div>
         </div>
         <div className="profile-right-section">
           <div

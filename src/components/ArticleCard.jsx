@@ -7,9 +7,7 @@ import { IoCreateOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 
-
-
-const ArticleCard = ({ newArticle,searchQuery,setSearchQuery,isAuth }) => {
+const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   const [articles, setArticles] = useState([]);
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
@@ -60,65 +58,68 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery,isAuth }) => {
     navigate(`/edit-article/${id}`);
   };
 
-  const filteredArticles = articles.filter((article)=>
+  const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <div>
-       <div style={{ position: "relative" , margin:"20px",display:"flex",justifyContent:"center"}}>
-          <input
-            type="search"
-            placeholder="Search..."
-            onChange={(e) => setSearchQuery(e.target.value)}
-            style={{
-              padding: "10px 40px 10px 30px",
-              borderRadius: "20px",
-              border: "2px solid #C5D9E2",
-              fontSize: "16px",
-              // outline: "none",
-              width: "900px",
-            }}
-          />
-          <CiSearch
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-              color: "#817F75",
-              fontSize: "18px",
-            }}
-          />
+      <div
+        style={{
+          position: "relative",
+          margin: "20px",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <input
+          type="search"
+          placeholder="Search..."
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            padding: "10px 40px 10px 30px",
+            borderRadius: "20px",
+            border: "2px solid #C5D9E2",
+            fontSize: "16px",
+            // outline: "none",
+            width: "900px",
+          }}
+        />
+        <CiSearch
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "10px",
+            transform: "translateY(-50%)",
+            color: "#817F75",
+            fontSize: "18px",
+          }}
+        />
+      </div>
+
+      {isAuth ? (
+        <div style={{ padding: "10px 20px 10px 20px" }}>
+          <Link to="/create-blog">
+            <button
+              style={{
+                padding: "8px",
+                background: "white",
+                border: "1px solid black",
+                color: "black",
+                marginTop: "5px",
+                // border: "none",
+                borderRadius: "5px",
+                fontSize: "1.7rem",
+                cursor: "pointer",
+              }}
+            >
+              <IoCreateOutline style={{ fontSize: "1.7rem" }} /> Create Blog
+            </button>
+          </Link>
         </div>
+      ) : null}
 
-
-        {
-          isAuth?(
-            <div style={
-              {padding: "10px 20px 10px 20px",}
-            }>
-                <Link to="/create-blog">
-                  <button  style={{
-                    padding: "8px",
-                    background: "white",
-                    border:"1px solid black",
-                    color:"black",
-                    marginTop:"5px",
-                    // border: "none",
-                    borderRadius: "5px",
-                    fontSize: "1.7rem",
-                    cursor: "pointer",
-                   
-                  }}><IoCreateOutline style={{fontSize:"1.7rem"}}/> {" "}Create Blog</button>
-                </Link></div>
-          ):(
-           null
-          )
-        }
-       
-
-      <h2 style={{margin:'20px',fontSize:"x-large"}}>Most Popular...</h2>
+      <h2 style={{ margin: "20px", fontSize: "x-large" }}>Most Popular...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="card">
@@ -128,7 +129,10 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery,isAuth }) => {
               className="card-image"
             />
             <div className="card-content">
-              <Link to={`/article/${article.id}`} style={{textDecoration:"none",color:"black"}}>
+              <Link
+                to={`/article/${article.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 <h2 className="card-title">{article.title}</h2>
               </Link>
               <p className="card-category">{article.category}</p>
@@ -156,20 +160,36 @@ const ArticleCard = ({ newArticle,searchQuery,setSearchQuery,isAuth }) => {
                   </span>
                 ))}
               </div>
-             {/* <div style={{display:"flex", justifyContent: "space-between"}}>
-              <button
-                onClick={() => editArticle(article.id)}
-                className="edit-button"
-              >
-                <CiEdit style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
-              </button> */}
-              {/* <button
-                onClick={() => deleteArticle(article.id)}
-                className="delete-button"
-              >
-                <MdOutlineDelete style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
-              </button> */}
-              {/* </div> */}
+              {/* {isAuth ? (
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <button
+                    onClick={() => editArticle(article.id)}
+                    className="edit-button"
+                  >
+                    <CiEdit
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                  <button
+                    onClick={() => deleteArticle(article.id)}
+                    className="delete-button"
+                  >
+                    <MdOutlineDelete
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                </div>
+              ) : null} */}
             </div>
           </div>
         ))}

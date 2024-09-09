@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { auth } from "../Firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { SyncLoader } from "react-spinners";
 
 const Login = ({ setIsAuth }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -18,7 +21,7 @@ const Login = ({ setIsAuth }) => {
       navigate("/");
       console.log("User logged in  successfully");
 
-      alert("User logged in  successfully");
+      // alert("User logged in  successfully");
     } catch (error) {
       console.log(error.message);
     }
@@ -26,7 +29,7 @@ const Login = ({ setIsAuth }) => {
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
-        <h1 style={{fontSize:"2.9rem"}}>Log In</h1>
+        <h1 style={{ fontSize: "2.9rem" }}>Log In</h1>
         <label htmlFor="">Email:</label>
         <input
           type="email"
@@ -45,7 +48,9 @@ const Login = ({ setIsAuth }) => {
           />
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit">
+          {loading ? <SyncLoader size={8} color={"#ffffff"} /> : "Submit"}
+        </button>
         <div>
           <p className="signup-link">
             Create an account{" "}
