@@ -69,7 +69,7 @@ function App() {
           />
           <Route path="/profile" element={<Profile isAuth={isAuth} />} />
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />} />
-          <Route path="/signup" element={<Signup />} />{" "}
+          <Route path="/signup" element={<Signup setIsAuth={setIsAuth} />} />{" "}
 
           <Route path="/error" element={<Error/>}/>
         </Routes>

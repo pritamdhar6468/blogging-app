@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../Firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
 
-const Signup = () => {
+const Signup = ({setIsAuth}) => {
   const [fname, setFname] = useState("");
   const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  let navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -30,7 +34,11 @@ const Signup = () => {
           lastName: lname,
         });
       }
-
+      if (user) {
+        localStorage.setItem("isAuth", true);
+        setIsAuth(true);
+        navigate("/");
+      }
       alert("User registered successfully");
     } catch (error) {
       console.log(error.message);
@@ -83,7 +91,7 @@ const Signup = () => {
             />
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? <SyncLoader size={8} color={"#ffffff"} /> : "Submit"}</button>
         </form>
         <div>
           <p>
