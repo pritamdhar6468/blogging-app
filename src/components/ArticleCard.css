@@ -227,6 +227,12 @@
   color: #000000;
 }
 
+
+/* toast css */
+.toast-body{
+  font-size: 2rem;
+}
+
 /* EditArticle.css  EditArticle.css EditArticle.css EditArticle.css EditArticle.css*/
 
 .edit-article-container {

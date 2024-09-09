@@ -1,4 +1,4 @@
-import React, { useEffect ,useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../Firebase";
@@ -6,6 +6,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { CiSearch } from "react-icons/ci";
 import { IoLogOutOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Header({ isAuth, setIsAuth }) {
   const [dropDown, setDropDown] = useState(false);
@@ -43,6 +46,25 @@ export default function Header({ isAuth, setIsAuth }) {
     // navigate('/profile')
   };
 
+  // const handleCreateBlogClick = () => {
+  //   if (!isAuth) {
+  //     toast.error("You need to log in to create a blog!", {
+  //       position: toast.POSITION.TOP_CENTER,
+  //     });
+  //   } else {
+  //     navigate("/create-blog");
+  //   }
+  // };
+  const handleCreateBlogClick = (e) => {
+    if (!isAuth) {
+      e.preventDefault(); // Prevent navigation
+      toast.error("You need to log in to create a blog!", {
+        position: "top-center",
+        bodyClassName: "toast-body",
+      });
+    }
+  };
+
   const handleLogOut = async () => {
     try {
       await auth.signOut();
@@ -55,7 +77,6 @@ export default function Header({ isAuth, setIsAuth }) {
       console.log(error.message);
     }
   };
-
 
   // Close dropdown if clicked outside
   useEffect(() => {
@@ -78,6 +99,7 @@ export default function Header({ isAuth, setIsAuth }) {
   }, [profileRef, dropdownRef]);
 
   return (
+    <>
     <div
       style={{
         display: "flex",
@@ -98,7 +120,11 @@ export default function Header({ isAuth, setIsAuth }) {
     >
       <div style={{ display: "flex", gap: "20px" }}>
         <h1
-          style={{ fontSize: "3.2rem", fontWeight: "bolder", color: "#183446" }}
+          style={{
+            fontSize: "3.2rem",
+            fontWeight: "bolder",
+            color: "#183446",
+          }}
         >
           Blogify
         </h1>
@@ -146,8 +172,7 @@ export default function Header({ isAuth, setIsAuth }) {
           </div>
         </Link>
 
-
-          {
+        {/* {
             isAuth?(
               <Link
               to="/create-blog"
@@ -187,36 +212,66 @@ export default function Header({ isAuth, setIsAuth }) {
               </div>
             </Link>
             )
-          }
-       
+          } */}
+
+        {/* {isAuth ? (
+            <div
+              onClick={handleCreateBlogClick}
+              style={{
+                padding: "5px",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+              }}
+            >
+              Create Blog
+            </div>
+          ) : (
+            <div
+              onClick={handleCreateBlogClick}
+              style={{
+                padding: "5px",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+              }}
+            >
+              Create Blog
+            </div>
+          )} */}
+        <Link
+          to={isAuth ? "/create-blog" : "#"}
+          style={{ textDecoration: "none", color: "black" }}
+          onClick={handleCreateBlogClick}
+        >
+          <div style={{ padding: "5px", fontSize: "1.5rem" }}>Create Blog</div>
+        </Link>
 
         {isAuth ? (
-        <div
-        ref={profileRef}
-        style={{
-          width: "40px",
-          height: "40px",
-          borderRadius: "50%",
-          backgroundImage: userDetails.profileImageUrl
-            ? `url(${userDetails.profileImageUrl})`
-            : "none",
-          backgroundColor: "#183446", // Fallback color if no profile image
-          backgroundSize: "cover",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "1.6rem",
-          color: "white",
-          fontWeight: "bold",
-        }}
-        onClick={toggleDropdown}
-      >
-        {userDetails.profileImageUrl
-          ? ""
-          : userDetails.firstName
-          ? userDetails.firstName.charAt(0)
-          : ""}
-      </div>
+          <div
+            ref={profileRef}
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              backgroundImage: userDetails.profileImageUrl
+                ? `url(${userDetails.profileImageUrl})`
+                : "none",
+              backgroundColor: "#183446", // Fallback color if no profile image
+              backgroundSize: "cover",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontSize: "1.6rem",
+              color: "white",
+              fontWeight: "bold",
+            }}
+            onClick={toggleDropdown}
+          >
+            {userDetails.profileImageUrl
+              ? ""
+              : userDetails.firstName
+              ? userDetails.firstName.charAt(0)
+              : ""}
+          </div>
         ) : (
           <Link to="/login">
             <button
@@ -245,27 +300,25 @@ export default function Header({ isAuth, setIsAuth }) {
           }}
         >
           {dropDown && (
-             <div
-            ref={dropdownRef} // Assign ref to the dropdown div
-            style={{
-              position: "absolute",
-              top: "60px",
-              right: "0",
-              backgroundColor: "#ffffff",
-              color: "#183446",
-              borderRadius: "5px",
-              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-              padding: "30px",
-              zIndex: "1001",
-              textAlign: "center",
-              opacity: dropDown ? 1 : 0, // Controls visibility
-              transform: dropDown
-                ? "translateY(0)"
-                : "translateY(-10px)", // Controls slide effect
-              transition: "opacity 0.5s ease, transform 0.5s ease", // Smooth transition
-              pointerEvents: dropDown ? "auto" : "none", // Disable clicks when hidden
-            }}
-          >
+            <div
+              ref={dropdownRef} // Assign ref to the dropdown div
+              style={{
+                position: "absolute",
+                top: "60px",
+                right: "0",
+                backgroundColor: "#ffffff",
+                color: "#183446",
+                borderRadius: "5px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                padding: "30px",
+                zIndex: "1001",
+                textAlign: "center",
+                opacity: dropDown ? 1 : 0, // Controls visibility
+                transform: dropDown ? "translateY(0)" : "translateY(-10px)", // Controls slide effect
+                transition: "opacity 0.5s ease, transform 0.5s ease", // Smooth transition
+                pointerEvents: dropDown ? "auto" : "none", // Disable clicks when hidden
+              }}
+            >
               {userDetails ? (
                 <p style={{ fontSize: "1.6rem", margin: 0 }}>
                   Welcome, {userDetails.firstName}!
@@ -329,6 +382,8 @@ export default function Header({ isAuth, setIsAuth }) {
           )}
         </div>
       </div>
+      
     </div>
+    <ToastContainer /></>
   );
 }

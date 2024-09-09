@@ -5,6 +5,8 @@ import SideBar from "../components/SideBar";
 import Footer from "../components/Footer";
 import ArticleCard from "../components/ArticleCard"
 import Featured from "../components/Featured";
+import { ToastContainer } from "react-toastify";
+
 
 export default function Allpost({newArticle}) {
   const [updatedArticle, setUpdatedArticle] = useState(null);
@@ -36,6 +38,7 @@ export default function Allpost({newArticle}) {
         </div>
       </div>
       {/* <Footer/> */}
+      <ToastContainer/>
     </div>
   );
 }

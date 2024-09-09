@@ -8,6 +8,11 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Articles from "./pages/Articles";
+
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
+
 function App() {
   const [newArticle, setNewArticle] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
@@ -44,6 +49,7 @@ function App() {
   };
 
   return (
+    <>
     <Router>
       
         <Routes>
@@ -68,6 +74,9 @@ function App() {
        
       
     </Router>
+    <ToastContainer/>
+    </>
+
   );
 }
 
