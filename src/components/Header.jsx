@@ -75,7 +75,7 @@ export default function Header({ isAuth, setIsAuth }) {
       // alert("user logging out");
       localStorage.removeItem("isAuth");
       // setIsAuth(false);
-      window.location.href = "/login";
+      window.location.href = "/";
       console.log("logged out sucessfully");
     } catch (error) {
       console.log(error.message);
