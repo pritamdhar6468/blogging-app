@@ -626,3 +626,16 @@
   font-size: large;
   font-weight: 500;
 }
+
+
+/* header.css header.css header.css header.css */
+
+.createblog-link:hover{
+  color: #793f3f;
+}
+.blogs-link:hover{
+  color: #000000;
+}
+.home-link:hover{
+  color: #000000;
+}

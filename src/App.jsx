@@ -8,9 +8,10 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Articles from "./pages/Articles";
+import Header from "./components/Header";
 
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+//   import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
   return (
     <>
     <Router>
-      
+      {/* <Header isAuth={isAuth}/> */}
         <Routes>
           <Route path="/" element={<Allpost newArticle={newArticle} />} />
           {isAuth?(<Route
@@ -76,7 +77,7 @@ function App() {
        
       
     </Router>
-    <ToastContainer/>
+    {/* <ToastContainer/> */}
     </>
 
   );
