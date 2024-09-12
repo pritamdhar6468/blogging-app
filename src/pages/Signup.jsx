@@ -39,15 +39,30 @@ const Signup = ({setIsAuth}) => {
         setIsAuth(true);
         navigate("/");
       }
-      alert("User registered successfully");
+      // alert("User registered successfully");
     } catch (error) {
       console.log(error.message);
     }
   };
 
   return (
-    <div className="signup-form-container">
-      <div >
+    <>
+    <div className="signup-form-container" style={{ position: "relative" }}>
+    <div >
+    {loading && (
+        <div style={{
+          position:"fixed",
+          top:0,
+          left:0,
+          width:"100%",
+          height:"100%",
+          backgroundColor:"rgba(0, 0, 0, 0.5)",
+          zIndex:"1000"
+        }}>
+
+        </div>
+      )}
+     
       <h1 style={{fontSize:"2.9rem"}}>Sign Up</h1>
         <form onSubmit={handleSubmit} className="signup-form">
           <div>
@@ -91,7 +106,7 @@ const Signup = ({setIsAuth}) => {
             />
           </div>
 
-          <button type="submit">{loading ? <SyncLoader size={8} color={"#ffffff"} /> : "Submit"}</button>
+          <button type="submit">Submit</button>
         </form>
         <div>
           <p>
@@ -100,6 +115,25 @@ const Signup = ({setIsAuth}) => {
         </div>
       </div>
     </div>
+    {
+      loading &&(
+        <div style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          backgroundColor: "black",
+          padding: "20px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+          borderRadius: "10px",
+          zIndex: "1002",
+          textAlign: "center",
+        }}>
+          <div><SyncLoader size={8} color={"#ffffff"} /></div>
+        </div>
+      )
+    }
+    </>
   );
 };
 

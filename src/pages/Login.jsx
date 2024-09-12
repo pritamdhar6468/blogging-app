@@ -29,7 +29,20 @@ const Login = ({ setIsAuth }) => {
   return (
     <>
     
-    <div className="login-container">
+    <div className="login-container" style={{ position: "relative" }}>
+      {loading && (
+        <div style={{
+          position:"fixed",
+          top:0,
+          left:0,
+          width:"100%",
+          height:"100%",
+          backgroundColor:"rgba(0, 0, 0, 0.5)",
+          zIndex:"1000"
+        }}>
+
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="login-form">
         <h1 style={{ fontSize: "2.9rem" }}>Log In</h1>
         <label htmlFor="">Email:</label>
@@ -51,7 +64,7 @@ const Login = ({ setIsAuth }) => {
         </div>
 
         <button type="submit">
-          {loading ? <SyncLoader size={8} color={"#ffffff"} /> : "Submit"}
+           Submit
         </button>
         <div>
           <p className="signup-link">
@@ -63,6 +76,24 @@ const Login = ({ setIsAuth }) => {
         </div>
       </form>
     </div>
+    {
+      loading &&(
+        <div style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          backgroundColor: "black",
+          padding: "20px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+          borderRadius: "10px",
+          zIndex: "1002",
+          textAlign: "center",
+        }}>
+          <div><SyncLoader size={8} color={"#ffffff"} /></div>
+        </div>
+      )
+    }
     </>
   );
 };

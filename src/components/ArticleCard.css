@@ -73,7 +73,7 @@
 }
 
 .tag {
-  background-color: #d0f3a4;
+  background-color: #f9f9f9;
   border-radius: 4px;
   padding: 4px 8px;
   font-size: 1.2rem;
@@ -227,9 +227,8 @@
   color: #000000;
 }
 
-
 /* toast css */
-.toast-body{
+.toast-body {
   font-size: 2rem;
 }
 
@@ -561,7 +560,6 @@
   height: 100vh;
   margin-left: 30px;
   border-right: 1px solid black;
-  
 }
 
 .profile-right-section {
@@ -570,11 +568,9 @@
   height: 100vh;
   padding-left: 10px;
   padding-right: 10px;
-  display:"flex";
-  flex-direction:"column";
-  justify-content:"flex-start";
-  
-  
+  display: "flex";
+  flex-direction: "column";
+  justify-content: "flex-start";
 }
 /* .profile-image-upload {
   display: flex;
@@ -589,29 +585,24 @@
   background-color: rgb(159, 157, 157);
   border-radius: 50%;
   object-fit: contain;
-  
 }
-.profile-category{
+.profile-category {
   display: flex;
   gap: 30px;
   font-size: 2.5rem;
   /* border: 1px solid black; */
-  padding-left: 20px ;
-  padding-right: 20px ;
+  padding-left: 20px;
+  padding-right: 20px;
   margin-top: 30px;
 }
 
-.profile-category-active{
-  border-bottom:2px solid blue ;
+.profile-category-active {
+  border-bottom: 2px solid blue;
 }
 
-
-.profile-home{
-  display:none ;
+.profile-home {
+  display: none;
 }
-
-
-
 
 .profile-buttons {
   width: 200px;
@@ -627,15 +618,29 @@
   font-weight: 500;
 }
 
-
 /* header.css header.css header.css header.css */
 
-.createblog-link:hover{
-  color: #793f3f;
+.createblog-link:hover {
+  color: #c4bebe;
 }
-.blogs-link:hover{
+.blogs-link:hover {
+  color: #c4bebe;
+}
+.home-link:hover {
+  color: #c4bebe;
+}
+
+.profile-hover-circle:hover {
+  background-color: white;
   color: #000000;
 }
-.home-link:hover{
-  color: #000000;
+.login-hover-button:hover{
+  background: #183446;
+  color: #ffffff;
+  transition:background 0.3s ease-in ;
+}
+/* from article-card */
+.createBlog-button:hover {
+  background-color: #0a1c27;
+  color: #f0f0f0;
 }

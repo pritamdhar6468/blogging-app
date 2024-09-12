@@ -168,6 +168,7 @@ export default function Header({ isAuth, setIsAuth }) {
       >
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <div
+            className="home-link"
             style={{
               padding: "6px",
               fontSize: "1.5rem",
@@ -184,6 +185,7 @@ export default function Header({ isAuth, setIsAuth }) {
 
         <Link to="/articles" style={{ textDecoration: "none", color: "black" }}>
           <div
+          className="blogs-link"
             style={{
               padding: "5px",
               fontSize: "1.5rem",
@@ -265,14 +267,16 @@ export default function Header({ isAuth, setIsAuth }) {
           )} */}
         <Link
           to={isAuth ? "/create-blog" : "#"}
+            
           style={{ textDecoration: "none", color: "black" }}
           onClick={handleCreateBlogClick}
         >
-          <div style={{ padding: "5px", fontSize: "1.5rem" }}>Create Blog</div>
+          <div className="createblog-link" style={{ padding: "5px", fontSize: "1.5rem" }}>Create Blog</div>
         </Link>
 
         {isAuth ? (
           <div
+            className="profile-hover-circle"
             ref={profileRef}
             style={{
               width: "40px",
@@ -301,11 +305,12 @@ export default function Header({ isAuth, setIsAuth }) {
         ) : (
           <Link to="/login">
             <button
+            className="login-hover-button"
               style={{
                 padding: "5px",
                 fontSize: "1.3rem",
                 borderRadius: "5px",
-                background: "#f9f9f9",
+                // background: "#f9f9f9",
                 border: "2px solid black",
                 cursor: "pointer",
               }}
@@ -419,7 +424,7 @@ export default function Header({ isAuth, setIsAuth }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "white",
+            backgroundColor: "black",
             padding: "20px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
             borderRadius: "10px",
@@ -427,7 +432,7 @@ export default function Header({ isAuth, setIsAuth }) {
             textAlign: "center",
           }}
         >
-          <p style={{ fontSize: "1.5rem", marginBottom: "15px",color:"black" }}>
+          <p style={{ fontSize: "1.5rem", marginBottom: "15px",color:"white" }}>
             Are you sure you want to logout?
           </p>
           <button

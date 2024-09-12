@@ -98,9 +98,10 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
       </div>
 
       {isAuth ? (
-        <div style={{ padding: "10px 20px 10px 20px" }}>
+        <div  style={{ padding: "10px 20px 10px 20px" }}>
           <Link to="/create-blog">
             <button
+              
               style={{
                 padding: "8px",
                 background: "white",
