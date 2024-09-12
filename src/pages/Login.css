@@ -56,7 +56,7 @@
     outline: none;
   }
   
-  .login-form button {
+  .submit-btn {
     width: 100%;
     padding: 12px;
     background-color: #183446;
@@ -69,7 +69,7 @@
     transition: background-color 0.2s ease;
   }
   
-  .login-form button:hover {
+  .submit-btn:hover {
     background-color: #025370;
   }
   
@@ -94,6 +94,16 @@
     text-decoration: underline;
   }
 
+  .visibility-btn{
+    position: absolute;
+    top: 35%;
+    right: 10px;
+    transform: "translateY(-50%)";
+    cursor: pointer;
+    font-size: 3rem;
+    border: none;
+    background: none;
+  }
 
 
   /* Signup.css Signup.css Signup.css */
@@ -150,7 +160,7 @@
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
   }
   
-  .signup-form button {
+  .submit-btn {
     width: 100%;
     padding: 12px;
     background-color: #183446;
@@ -163,8 +173,18 @@
     transition: background-color 0.2s ease;
   }
   
-  .signup-form button:hover {
+  .submit-btn:hover {
     background-color: #025370;
+  }
+  .signup-visibility-btn{
+    position: absolute;
+    top: 30%;
+    right: 10px;
+    transform: "translateY(-50%)";
+    cursor: pointer;
+    font-size: 3rem;
+    border: none;
+    background: none;
   }
   
   .signup-form-container p {

@@ -5,6 +5,8 @@ import { auth, db } from "../Firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 import { SyncLoader } from "react-spinners";
+import { MdOutlineVisibility } from "react-icons/md";
+import { MdOutlineVisibilityOff } from "react-icons/md";
 
 const Signup = ({setIsAuth}) => {
   const [fname, setFname] = useState("");
@@ -12,6 +14,8 @@ const Signup = ({setIsAuth}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   let navigate = useNavigate()
 
@@ -96,17 +100,29 @@ const Signup = ({setIsAuth}) => {
             />
           </div>
 
-          <div>
+          <div style={{ position: "relative" }}>
             <label htmlFor="">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="signup-visibility-btn"
+            >
+              {showPassword ? (
+                <MdOutlineVisibility />
+              ) : (
+                <MdOutlineVisibilityOff />  //condition for visibility-icon 
+              )}{" "}
+              
+            </button>
           </div>
 
-          <button type="submit">Submit</button>
+          <button className="submit-btn" type="submit">Submit</button>
         </form>
         <div>
           <p>
