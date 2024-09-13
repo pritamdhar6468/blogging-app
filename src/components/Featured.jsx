@@ -21,7 +21,7 @@ const Featured = () => {
 
   return (
     <div>
-      <h2 style={{margin:'20px',fontSize:"x-large"}}>Featured</h2>
+      <h2 style={{margin:'20px',fontSize:"x-large"}}>Featured Posts</h2>
       <div className="card-container">
         {securityArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="featured-card">

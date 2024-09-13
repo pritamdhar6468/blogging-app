@@ -118,7 +118,7 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
           comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                style={{ display: "flex", alignItems: "center", gap: "10px",paddingBottom:"10px" , }}
               >
                 <div
                   // ref={profileRef}
