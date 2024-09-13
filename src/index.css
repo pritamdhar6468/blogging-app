@@ -9,3 +9,6 @@
   font-style: normal;
   font-size: 62.5%;
 }
+html {
+  overflow-y: scroll;
+}

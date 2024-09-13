@@ -28,7 +28,7 @@ export default function Allpost({newArticle}) {
     localStorage.setItem('newArticles', JSON.stringify(updatedArticles));
   };
   return (
-    <div>
+    <div className="allpost-container">
       <Header isAuth={isAuth} setIsAuth={setIsAuth} setSearchQuery={setSearchQuery} />
       <div style={{ display: "flex" ,marginTop: "70px"}}>
         {/* <SideBar  /> */}
