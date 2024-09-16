@@ -641,6 +641,42 @@
   font-weight: 500;
 }
 
+.profile-category-container{
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  
+}
+.profile-category-container img{
+  width: 30%;
+}
+.profile-category-container h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.profile-category-container p{
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.profile-author-pic{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.profile-author-pic img{
+  width: 30px;
+}
+.profile-author-pic p{
+  font-size: 1.1rem;
+}
+.image{
+  width: 10px;
+  height: 10px;
+}
+
 /* header.css header.css header.css header.css */
 
 .createblog-link:hover {

@@ -10,6 +10,16 @@ import { GrFavorite } from "react-icons/gr";
 const Profile = ({ isAuth }) => {
   const [userDetails, setUserDetails] = useState("");
   const [userImage, setUserImage] = useState("");
+  const [articles, setArticles] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(4); // Initial number of articles to show
+
+  // Fetch data from the JSON file using useEffect
+  useEffect(() => {
+    fetch('/Blogsdata.json')  // Assuming the JSON file is in the public folder
+      .then(response => response.json())
+      .then(data => setArticles(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
 
   // Fetch user's uploaded image from local storage
   useEffect(() => {
@@ -81,8 +91,23 @@ const Profile = ({ isAuth }) => {
             <div className="profile-category-active">Home</div>
             <div className="profile-category-active">About</div>
           </div>
-          <div>juytyuy</div>
+          <div style={{height:"60%",overflowY:"scroll"}}>
+          {articles.slice(0, visibleCount).map((article) => (
+          <div key={article.id} className="profile-category-container">
+            <img src={article.image} alt={article.title} />
+            <div>
+              <h2>{article.title}</h2>
+              <p>{article.category}</p>
+              <div className="profile-author-pic">
+                <img className="home-image" src={article.authorPic} alt={article.author} />
+                <p>{article.author}</p>
+              </div>
+            </div>
+          </div>
+           ))}
+           </div>
         </div>
+         
         <div className="profile-right-section">
           <div
             style={{
