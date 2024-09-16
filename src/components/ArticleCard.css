@@ -503,20 +503,22 @@
   margin-bottom: 20px;
   color: #333333;
   font-weight: 500;
+  
 }
 
 .comment {
   /* background-color: #c28c8c; */
   /* border-color: #007BFF; */
-  border: 1px solid #5690ce;
+  /* border: 1px solid #1a1b1c; */
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 15px;
   word-wrap: break-word;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.comment:hover {
+/* .comment:hover {
   background-color: #9eccfc;
-}
+} */
 
 .comment p {
   font-size: 1.5rem;
@@ -563,7 +565,7 @@
   background-color: #0b212e;
 }
 
-/* profile page css */
+/* profile page css profile page css profile page css profile page css*/
 .profile-container {
   display: flex;
   max-width: 75%;
@@ -581,7 +583,7 @@
   /* border: 1px solid green; */
   width: 70%;
   height: 100vh;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   border-right: 1px solid black;
 }
 
@@ -671,6 +673,9 @@
 }
 .profile-author-pic p{
   font-size: 1.1rem;
+}
+.profile-details-container{
+  width: 70%;
 }
 .image{
   width: 10px;

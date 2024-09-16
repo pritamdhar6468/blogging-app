@@ -147,6 +147,36 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
                   </span>
                 ))}
               </div>
+              {isAuth ? (
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <button
+                    onClick={() => editArticle(article.id)}
+                    className="edit-button"
+                  >
+                    <CiEdit
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                  <button
+                    onClick={() => deleteArticle(article.id)}
+                    className="delete-button"
+                  >
+                    <MdOutlineDelete
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                </div>
+              ) : null}
              {/* <div style={{display:"flex", justifyContent: "space-between"}}>
               <button
                 onClick={() => editArticle(article.id)}

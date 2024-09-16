@@ -161,7 +161,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
                   </span>
                 ))}
               </div>
-              {/* {isAuth ? (
+              {isAuth ? (
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
@@ -190,7 +190,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
                     />
                   </button>
                 </div>
-              ) : null} */}
+              ) : null}
             </div>
           </div>
         ))}

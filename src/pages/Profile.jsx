@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { GoHistory } from "react-icons/go";
 import { GrFavorite } from "react-icons/gr";
+import { CiEdit } from "react-icons/ci";
+import { MdOutlineDelete } from "react-icons/md";
 
 const Profile = ({ isAuth }) => {
   const [userDetails, setUserDetails] = useState("");
   const [userImage, setUserImage] = useState("");
   const [articles, setArticles] = useState([]);
   const [visibleCount, setVisibleCount] = useState(4); // Initial number of articles to show
-
+  let navigate = useNavigate();
   // Fetch data from the JSON file using useEffect
   useEffect(() => {
     fetch('/Blogsdata.json')  // Assuming the JSON file is in the public folder
@@ -64,6 +67,28 @@ const Profile = ({ isAuth }) => {
     fetchUserData();
   }, []);
 
+
+
+
+  const deleteArticle = (id) => {
+    const updatedArticles = articles.filter((article) => article.id !== id);
+    setArticles(updatedArticles);
+
+    // Update localStorage if the deleted article was newly added
+    const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
+    const updatedSavedArticles = savedArticles.filter(
+      (article) => article.id !== id
+    );
+    localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
+  };
+
+  const editArticle = (id) => {
+    navigate(`/edit-article/${id}`);
+  };
+
+
+
+
   return (
     <>
       <Header isAuth={isAuth} />
@@ -83,25 +108,55 @@ const Profile = ({ isAuth }) => {
               </span>
             ) : null}
           </div>
-          <h2 style={{ fontSize: "2.4rem", marginLeft: "30px" }}>
+          <h2 style={{ fontSize: "2.4rem", marginLeft: "10px" }}>
             {userDetails.firstName} {userDetails.lastName}
           </h2>
           <hr />
           <div className="profile-category">
             <div className="profile-category-active">Home</div>
-            <div className="profile-category-active">About</div>
+            {/* <div className="profile-category-active">About</div> */}
           </div>
           <div style={{height:"60%",overflowY:"scroll"}}>
           {articles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="profile-category-container">
             <img src={article.image} alt={article.title} />
-            <div>
+            <div className="profile-details-container">
               <h2>{article.title}</h2>
               <p>{article.category}</p>
               <div className="profile-author-pic">
                 <img className="home-image" src={article.authorPic} alt={article.author} />
                 <p>{article.author}</p>
               </div>
+              {isAuth ? (
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <button
+                    onClick={() => editArticle(article.id)}
+                    className="edit-button"
+                  >
+                    <CiEdit
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                  <button
+                    onClick={() => deleteArticle(article.id)}
+                    className="delete-button"
+                  >
+                    <MdOutlineDelete
+                      style={{
+                        fontSize: "20px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    />
+                  </button>
+                </div>
+              ) : null}
             </div>
           </div>
            ))}
