@@ -233,7 +233,7 @@ const profileImgStyle = {
 };
 
 const profileInitialStyle = {
-  fontSize: "4rem",
+  fontSize: "6rem",
   fontWeight: "bold",
   color: "white",
 };

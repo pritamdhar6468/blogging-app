@@ -101,18 +101,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         <div  style={{ padding: "10px 20px 10px 20px" }}>
           <Link to="/create-blog">
             <button
-              
-              style={{
-                padding: "8px",
-                background: "white",
-                border: "1px solid black",
-                color: "black",
-                marginTop: "5px",
-                // border: "none",
-                borderRadius: "5px",
-                fontSize: "1.7rem",
-                cursor: "pointer",
-              }}
+            className="create-hover-button"
             >
               <IoCreateOutline style={{ fontSize: "1.7rem" }} /> Create Blog
             </button>
