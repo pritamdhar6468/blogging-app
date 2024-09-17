@@ -718,6 +718,8 @@
   cursor: pointer;
   background-color: white;
   transition: 0.2s ease-in;
+  display: flex;
+  align-items: center;
 }
 .create-hover-button:hover{
   background-color: #0a1c27;

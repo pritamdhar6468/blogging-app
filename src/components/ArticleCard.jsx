@@ -99,11 +99,12 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
       {isAuth ? (
         <div  style={{ padding: "10px 20px 10px 20px" }}>
-          <Link to="/create-blog">
+          <Link style={{ textDecoration:"none"}} to="/create-blog">
             <button
             className="create-hover-button"
             >
-              <IoCreateOutline style={{ fontSize: "1.7rem" }} /> Create Blog
+              <span><IoCreateOutline style={{ fontSize: "2.5rem" }} /></span> 
+              <span style={{ fontSize: "2rem" }}>Create Blog</span>
             </button>
           </Link>
         </div>
