@@ -22,7 +22,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   useEffect(() => {
     // Fetch data from the JSON file
-    fetch("/Blogdata.json")
+    fetch("/Blogsdata.json")
       .then((response) => response.json())
       .then((data) => {
         // Combine articles from localStorage with those from the JSON file
@@ -31,7 +31,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         setArticles([...savedArticles, ...data]);
       })
       .catch((error) => console.error("Error fetching data:", error));
-      throw new Error("error fetching data")
+      // throw new Error("error fetching data")
   }, []);
 
   const showMoreArticles = () => {
