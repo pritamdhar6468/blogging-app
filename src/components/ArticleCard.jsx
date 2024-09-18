@@ -22,7 +22,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   useEffect(() => {
     // Fetch data from the JSON file
-    fetch("/Blogsdata.json")
+    fetch("/Blogdata.json")
       .then((response) => response.json())
       .then((data) => {
         // Combine articles from localStorage with those from the JSON file

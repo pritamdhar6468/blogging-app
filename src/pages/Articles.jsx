@@ -7,17 +7,14 @@ import { IoCreateOutline } from "react-icons/io5";
 
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
+import { ErrorBoundary } from "@sentry/react";
 
-
-
-const Articles = ({ newArticle,isAuth,setIsAuth }) => {
+const Articles = ({ newArticle, isAuth, setIsAuth }) => {
   const [articles, setArticles] = useState([]);
-  const [searchQuery,setSearchQuery] = useState("");
-
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
   let navigate = useNavigate();
-
 
   // useEffect(() => {
   //   const authStatus = localStorage.getItem("isAuth");
@@ -72,22 +69,36 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
   //   navigate(`/edit-article/${id}`);
   // };
 
-  const filteredArticles = articles.filter((article)=>
+  const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <>
-    <Header isAuth={isAuth}/>
-    
-    <div style={{display:"flex",flexDirection:"column", alignItems:"center"}}>
-       <div style={{ position: "relative" , marginTop:"90px",display:"flex",justifyContent:"center"}}>
+    <ErrorBoundary fallback={"an error occured"}>
+      <Header isAuth={isAuth} />
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "relative",
+            marginTop: "90px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <input
             type="search"
             placeholder="Search..."
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
-              position: "relative" ,
+              position: "relative",
               padding: "10px 40px 10px 30px",
               borderRadius: "20px",
               border: "2px solid #C5D9E2",
@@ -107,100 +118,111 @@ const Articles = ({ newArticle,isAuth,setIsAuth }) => {
             }}
           />
         </div>
-       
 
-      <h2 style={{maxWidth:"70%",margin:'20px',fontSize:"3.5rem"}}>All Post...</h2>
-      <div className="articles-card-container">
-        {filteredArticles.slice(0, visibleCount).map((article) => (
-          <div key={article.id} className="articles-card">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="articles-card-image"
-            />
-            <div className="articles-card-content">
-              <Link to={`/article/${article.id}`} style={{textDecoration:"none",color:"black"}}>
-                <h2 className="articles-card-title">{truncateContent(article.title)}</h2>
-              </Link>
-              <p className="articles-card-category">{article.category}</p>
-              <div className="articles-card-author">
-                <img
-                  src={article.authorPic}
-                  alt={article.author}
-                  className="articles-author-pic"
-                />
-                <p>{article.author}</p>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <p className="articles-card-date">{article.published_date}</p>
-                <p className="articles-card-reading-time">{article.reading_time}</p>
-              </div>
-
-              {/* <p className="card-text">{truncateContent(article.content)}</p> */}
-              {/* <Link to={`/article/${article.id}`} className="read-more-link">
-                Read More
-              </Link> */}
-              <div className="articles-card-tags">
-                {article.tags.map((tag, index) => (
-                  <span key={index} className="tag">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              {isAuth ? (
+        <h2 style={{ maxWidth: "70%", margin: "20px", fontSize: "3.5rem" }}>
+          All Post...
+        </h2>
+        <div className="articles-card-container">
+          {filteredArticles.slice(0, visibleCount).map((article) => (
+            <div key={article.id} className="articles-card">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="articles-card-image"
+              />
+              <div className="articles-card-content">
+                <Link
+                  to={`/article/${article.id}`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <h2 className="articles-card-title">
+                    {truncateContent(article.title)}
+                  </h2>
+                </Link>
+                <p className="articles-card-category">{article.category}</p>
+                <div className="articles-card-author">
+                  <img
+                    src={article.authorPic}
+                    alt={article.author}
+                    className="articles-author-pic"
+                  />
+                  <p>{article.author}</p>
+                </div>
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <button
-                    onClick={() => editArticle(article.id)}
-                    className="edit-button"
-                  >
-                    <CiEdit
-                      style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    />
-                  </button>
-                  <button
-                    onClick={() => deleteArticle(article.id)}
-                    className="delete-button"
-                  >
-                    <MdOutlineDelete
-                      style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    />
-                  </button>
+                  <p className="articles-card-date">{article.published_date}</p>
+                  <p className="articles-card-reading-time">
+                    {article.reading_time}
+                  </p>
                 </div>
-              ) : null}
-             {/* <div style={{display:"flex", justifyContent: "space-between"}}>
+
+                {/* <p className="card-text">{truncateContent(article.content)}</p> */}
+                {/* <Link to={`/article/${article.id}`} className="read-more-link">
+                Read More
+              </Link> */}
+                <div className="articles-card-tags">
+                  {article.tags.map((tag, index) => (
+                    <span key={index} className="tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {isAuth ? (
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <button
+                      onClick={() => editArticle(article.id)}
+                      className="edit-button"
+                    >
+                      <CiEdit
+                        style={{
+                          fontSize: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      />
+                    </button>
+                    <button
+                      onClick={() => deleteArticle(article.id)}
+                      className="delete-button"
+                    >
+                      <MdOutlineDelete
+                        style={{
+                          fontSize: "20px",
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      />
+                    </button>
+                  </div>
+                ) : null}
+                {/* <div style={{display:"flex", justifyContent: "space-between"}}>
               <button
                 onClick={() => editArticle(article.id)}
                 className="edit-button"
               >
                 <CiEdit style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
               </button> */}
-              {/* <button
+                {/* <button
                 onClick={() => deleteArticle(article.id)}
                 className="delete-button"
               >
                 <MdOutlineDelete style={{fontSize:"20px",display:"flex",alignItems:"center"}}/>
               </button> */}
-              {/* </div> */}
+                {/* </div> */}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {visibleCount < articles.length && (
+          <button className="show-more-button" onClick={showMoreArticles}>
+            Show More
+          </button>
+        )}
       </div>
-      {visibleCount < articles.length && (
-        <button className="show-more-button" onClick={showMoreArticles}>
-          Show More
-        </button>
-      )}
-    </div>
+      </ErrorBoundary>
     </>
   );
 };

@@ -24,7 +24,10 @@ function App() {
     if (authStatus === "true") {
       setIsAuth(true);
     }
+    console.error("authorization completed")
   }, []);
+
+ 
 
   useEffect(() => {
     // Retrieve any saved articles from localStorage on load
@@ -78,6 +81,9 @@ function App() {
       
     </Router>
     {/* <ToastContainer/> */}
+    {/* <button onClick={() => methodDoesNotExist()}>Break the world</button>;
+    <button onClick={() => methodDoesExist()}>Break the world</button>; */}
+
     </>
 
   );
