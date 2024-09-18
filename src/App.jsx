@@ -24,7 +24,7 @@ function App() {
     if (authStatus === "true") {
       setIsAuth(true);
     }
-    console.error("authorization completed")
+    // console.error("authorization completed")
   }, []);
 
  

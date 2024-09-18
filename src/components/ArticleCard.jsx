@@ -31,6 +31,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         setArticles([...savedArticles, ...data]);
       })
       .catch((error) => console.error("Error fetching data:", error));
+      throw new Error("error fetching data")
   }, []);
 
   const showMoreArticles = () => {
@@ -64,6 +65,15 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   return (
     <div>
+      <button
+        type="button"
+        onClick={() => {
+          throw new Error("Sentry pherom Error");
+        }}
+      >
+        Break the world
+      </button>
+      ;
       <div
         style={{
           position: "relative",
@@ -96,20 +106,18 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
           }}
         />
       </div>
-
       {isAuth ? (
-        <div  style={{ padding: "10px 20px 10px 20px" }}>
-          <Link style={{ textDecoration:"none"}} to="/create-blog">
-            <button
-            className="create-hover-button"
-            >
-              <span><IoCreateOutline style={{ fontSize: "2.5rem" }} /></span> 
+        <div style={{ padding: "10px 20px 10px 20px" }}>
+          <Link style={{ textDecoration: "none" }} to="/create-blog">
+            <button className="create-hover-button">
+              <span>
+                <IoCreateOutline style={{ fontSize: "2.5rem" }} />
+              </span>
               <span style={{ fontSize: "2rem" }}>Create Blog</span>
             </button>
           </Link>
         </div>
       ) : null}
-
       <h2 style={{ margin: "20px", fontSize: "x-large" }}>Most Popular...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
