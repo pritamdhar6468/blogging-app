@@ -4,6 +4,7 @@ import "../components/ArticleCard.css";
 import Header from "../components/Header";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
+// import EditArticle from "../components/EditArticle";
 
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
@@ -53,21 +54,21 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
     return words.length > 8 ? words.slice(0, 8).join(" ") + "..." : content;
   };
 
-  // const deleteArticle = (id) => {
-  //   const updatedArticles = articles.filter((article) => article.id !== id);
-  //   setArticles(updatedArticles);
+  const deleteArticle = (id) => {
+    const updatedArticles = articles.filter((article) => article.id !== id);
+    setArticles(updatedArticles);
 
-  //   // Update localStorage if the deleted article was newly added
-  //   const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
-  //   const updatedSavedArticles = savedArticles.filter(
-  //     (article) => article.id !== id
-  //   );
-  //   localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
-  // };
+    // Update localStorage if the deleted article was newly added
+    const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
+    const updatedSavedArticles = savedArticles.filter(
+      (article) => article.id !== id
+    );
+    localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
+  };
 
-  // const editArticle = (id) => {
-  //   navigate(`/edit-article/${id}`);
-  // };
+  const editArticle = (id) => {
+    navigate(`/edit-article/${id}`);
+  };
 
   const filteredArticles = articles.filter((article) =>
     article.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -75,7 +76,7 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
 
   return (
     <>
-    <ErrorBoundary fallback={"an error occured"}>
+    {/* <ErrorBoundary fallback={"an error occured"}> */}
       <Header isAuth={isAuth} />
 
       <div
@@ -168,7 +169,7 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
                     </span>
                   ))}
                 </div>
-                {isAuth ? (
+                {/* {isAuth ? (
                   <div
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
@@ -197,7 +198,11 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
                       />
                     </button>
                   </div>
-                ) : null}
+                ) : null} */}
+
+
+
+
                 {/* <div style={{display:"flex", justifyContent: "space-between"}}>
               <button
                 onClick={() => editArticle(article.id)}
@@ -222,7 +227,7 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
           </button>
         )}
       </div>
-      </ErrorBoundary>
+      {/* </ErrorBoundary> */}
     </>
   );
 };

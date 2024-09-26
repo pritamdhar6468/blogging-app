@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./ArticleCard.css";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
+// import EditArticle from "./EditArticle";
 
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
@@ -13,12 +14,23 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   const [visibleCount, setVisibleCount] = useState(6); // Initial number of articles to show
   let navigate = useNavigate();
 
-  // Add new article if provided
   useEffect(() => {
     if (newArticle) {
-      setArticles((prevArticles) => [newArticle, ...prevArticles]);
+      setArticles((prevArticles) => {
+        const articleIndex = prevArticles.findIndex(a => a.id === newArticle.id);
+        
+        // If the article exists, replace it, otherwise add the new article
+        if (articleIndex !== -1) {
+          const updatedArticles = [...prevArticles];
+          updatedArticles[articleIndex] = newArticle;
+          return updatedArticles;
+        } else {
+          return [newArticle, ...prevArticles];
+        }
+      });
     }
   }, [newArticle]);
+  
 
   useEffect(() => {
     // Fetch data from the JSON file

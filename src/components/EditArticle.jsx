@@ -23,12 +23,29 @@ const EditArticle = ({ onUpdate }) => {
     }
   }, [id]);
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    // Update the article in the state and localStorage
-    onUpdate(article);
-    navigate('/');
-  };
+ const handleUpdate = (e) => {
+  e.preventDefault();
+
+  // Fetch the articles from localStorage
+  const savedArticles = JSON.parse(localStorage.getItem('newArticles')) || [];
+
+  // Find the index of the current article in the savedArticles array
+  const articleIndex = savedArticles.findIndex(a => a.id === parseInt(id));
+
+  if (articleIndex !== -1) {
+    // Update the article at the found index
+    savedArticles[articleIndex] = article;
+
+    // Save the updated articles array back to localStorage
+    localStorage.setItem('newArticles', JSON.stringify(savedArticles));
+  }
+
+  // Call the onUpdate function to update the state in the parent component (if needed)
+  onUpdate(article);
+
+  // Redirect to the home page after update
+  navigate('/');
+};
 
   if (!article) return <div>Loading...</div>;
 
