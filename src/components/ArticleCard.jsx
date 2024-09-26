@@ -65,15 +65,15 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   return (
     <div>
-      <button
+      {/* <button
         type="button"
         onClick={() => {
           throw new Error("Sentry pherom Error");
         }}
       >
         Break the world
-      </button>
-      ;
+      </button> */}
+      {/* ; */}
       <div
         style={{
           position: "relative",

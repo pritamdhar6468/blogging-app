@@ -1,9 +1,9 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.jsx";
 // import "./instrument";
-import './index.css'
-import { ErrorBoundary } from '@sentry/react';
+import "./index.css";
+import { ErrorBoundary } from "@sentry/react";
 
 import { useEffect } from "react";
 import * as Sentry from "@sentry/react";
@@ -29,7 +29,8 @@ Sentry.init({
     Sentry.replayIntegration({
       // Additional SDK configuration goes in here, for example:
       maskAllText: true,
-      blockAllMedia: true,})
+      blockAllMedia: true,
+    }),
   ],
 
   // Set tracesSampleRate to 1.0 to capture 100%
@@ -45,9 +46,8 @@ Sentry.init({
   replaysOnErrorSampleRate: 1.0,
 });
 
-
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-   </StrictMode>,
-)
+  </StrictMode>
+);

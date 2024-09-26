@@ -9,6 +9,7 @@ import { GoHistory } from "react-icons/go";
 import { GrFavorite } from "react-icons/gr";
 import { CiEdit } from "react-icons/ci";
 import { MdOutlineDelete } from "react-icons/md";
+import ProfileSetting from "../components/ProfileSetting";
 
 const Profile = ({ isAuth }) => {
   const [userDetails, setUserDetails] = useState("");
@@ -108,6 +109,7 @@ const Profile = ({ isAuth }) => {
               </span>
             ) : null}
           </div>
+          {/* <ProfileSetting/> */}
           <h2 style={{ fontSize: "2.4rem", marginLeft: "10px" }}>
             {userDetails.firstName} {userDetails.lastName}
           </h2>
