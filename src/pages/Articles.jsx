@@ -28,7 +28,20 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
   // Add new article if provided
   useEffect(() => {
     if (newArticle) {
-      setArticles((prevArticles) => [newArticle, ...prevArticles]);
+      setArticles((prevArticles) => {
+        const articleIndex = prevArticles.findIndex(
+          (a) => a.id === newArticle.id
+        );
+
+        // If the article exists, replace it, otherwise add the new article
+        if (articleIndex !== -1) {
+          const updatedArticles = [...prevArticles];
+          updatedArticles[articleIndex] = newArticle;
+          return updatedArticles;
+        } else {
+          return [newArticle, ...prevArticles];
+        }
+      });
     }
   }, [newArticle]);
 

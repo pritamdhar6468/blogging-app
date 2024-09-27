@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, db } from "../Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { GoHistory } from "react-icons/go";
@@ -123,13 +123,18 @@ const Profile = ({ isAuth }) => {
           <div key={article.id} className="profile-category-container">
             <img src={article.image} alt={article.title} />
             <div className="profile-details-container">
-              <h2>{article.title}</h2>
+               <Link
+                to={`/article/${article.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <h2 className="card-title">{article.title}</h2>
+              </Link>
               <p>{article.category}</p>
               <div className="profile-author-pic">
                 <img className="home-image" src={article.authorPic} alt={article.author} />
                 <p>{article.author}</p>
               </div>
-              {isAuth ? (
+              {/* {isAuth ? (
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
@@ -158,7 +163,7 @@ const Profile = ({ isAuth }) => {
                     />
                   </button>
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
            ))}

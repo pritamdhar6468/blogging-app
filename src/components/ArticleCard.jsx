@@ -17,8 +17,10 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   useEffect(() => {
     if (newArticle) {
       setArticles((prevArticles) => {
-        const articleIndex = prevArticles.findIndex(a => a.id === newArticle.id);
-        
+        const articleIndex = prevArticles.findIndex(
+          (a) => a.id === newArticle.id
+        );
+
         // If the article exists, replace it, otherwise add the new article
         if (articleIndex !== -1) {
           const updatedArticles = [...prevArticles];
@@ -30,7 +32,6 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
       });
     }
   }, [newArticle]);
-  
 
   useEffect(() => {
     // Fetch data from the JSON file
@@ -43,7 +44,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         setArticles([...savedArticles, ...data]);
       })
       .catch((error) => console.error("Error fetching data:", error));
-      // throw new Error("error fetching data")
+    // throw new Error("error fetching data")
   }, []);
 
   const showMoreArticles = () => {
@@ -120,7 +121,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
       </div>
       {isAuth ? (
         <div style={{ padding: "10px 20px 10px 20px" }}>
-          <Link style={{ textDecoration: "none" }} to="/create-blog">
+          <Link style={{ textDecoration: "none",}} to="/create-blog">
             <button className="create-hover-button">
               <span>
                 <IoCreateOutline style={{ fontSize: "2.5rem" }} />
@@ -175,30 +176,37 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  <button
-                    onClick={() => editArticle(article.id)}
-                    className="edit-button"
-                  >
-                    <CiEdit
-                      style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    />
-                  </button>
-                  <button
-                    onClick={() => deleteArticle(article.id)}
-                    className="delete-button"
-                  >
-                    <MdOutlineDelete
-                      style={{
-                        fontSize: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    />
-                  </button>
+                  {localStorage.getItem("newArticles") &&
+                  JSON.parse(localStorage.getItem("newArticles")).some(
+                    (savedArticle) => savedArticle.id === article.id
+                  ) ? (
+                    <>
+                      <button
+                        onClick={() => editArticle(article.id)}
+                        className="edit-button"
+                      >
+                        <CiEdit
+                          style={{
+                            fontSize: "20px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        />
+                      </button>
+                      <button
+                        onClick={() => deleteArticle(article.id)}
+                        className="delete-button"
+                      >
+                        <MdOutlineDelete
+                          style={{
+                            fontSize: "20px",
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        />
+                      </button>
+                    </>
+                  ) : null}
                 </div>
               ) : null}
             </div>

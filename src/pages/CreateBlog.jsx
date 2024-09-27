@@ -27,7 +27,7 @@ const CreateBlog = ({ onPublish, isAuth }) => {
         author,
         authorPic,
         published_date: publishedDate,
-        reading_time: readingTime,
+        reading_time: readingTime+" "+"minutes",
         content,
         tags: tags.split(",").map((tag) => tag.trim()), // Convert tags to an array
       };
