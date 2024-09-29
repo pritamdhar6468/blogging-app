@@ -29,13 +29,13 @@ function App() {
 
  
 
-  useEffect(() => {
-    // Retrieve any saved articles from localStorage on load
-    const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
-    if (savedArticles.length > 0) {
-      setNewArticle(savedArticles[0]); // Only set the latest article as the new one
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Retrieve any saved articles from localStorage on load
+  //   const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
+  //   if (savedArticles.length > 0) {
+  //     setNewArticle(savedArticles[0]); // Only set the latest article as the new one
+  //   }
+  // }, []);
 
   const handlePublish = (article) => {
     // Save the new article to state
@@ -43,9 +43,9 @@ function App() {
 
     // Save the article to localStorage
     const existingArticles =
-      JSON.parse(localStorage.getItem("newArticles")) || [];
+      JSON.parse(localStorage.getItem("articles")) || [];
     existingArticles.unshift(article); // Add the new article to the start of the array
-    localStorage.setItem("newArticles", JSON.stringify(existingArticles));
+    localStorage.setItem("articles", JSON.stringify(existingArticles));
   };
 
   const handleUpdate = (updatedArticle) => {

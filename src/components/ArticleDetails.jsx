@@ -32,7 +32,7 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
   useEffect(() => {
     if (!article) {
       const savedArticles =
-        JSON.parse(localStorage.getItem("newArticles")) || [];
+        JSON.parse(localStorage.getItem("articles")) || [];
       const localArticle = savedArticles.find(
         (article) => article.id === parseInt(id)
       );

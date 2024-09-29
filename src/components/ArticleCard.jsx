@@ -35,17 +35,18 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   }, [newArticle]);
 
   useEffect(() => {
-    // Fetch data from the JSON file
-    fetch("/Blogsdata.json")
-      .then((response) => response.json())
-      .then((data) => {
-        // Combine articles from localStorage with those from the JSON file
-        const savedArticles =
-          JSON.parse(localStorage.getItem("newArticles")) || [];
-        setArticles([ ...data]);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-    // throw new Error("error fetching data")
+    const storedArticles = localStorage.getItem("articles");
+    if (storedArticles) {
+      setArticles(JSON.parse(storedArticles));
+    } else {
+      fetch("/Blogsdata.json")
+        .then((response) => response.json())
+        .then((data) => {
+          localStorage.setItem("articles", JSON.stringify(data));
+          setArticles(data);
+        });
+    }
+    
   }, []);
 
   const showMoreArticles = () => {
@@ -53,13 +54,12 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   };
 
   // Helper function to calculate reading time
-const calculateReadingTime = (content) => {
-  const wordsPerMinute = 250; // Average reading speed
-  const wordCount = content.split(" ").length; // Counting words in the content
-  const readingTime = Math.ceil(wordCount / wordsPerMinute); // Rounding up to nearest minute
-  return `${readingTime} min read`;
-};
-
+  const calculateReadingTime = (content) => {
+    const wordsPerMinute = 250; // Average reading speed
+    const wordCount = content.split(" ").length; // Counting words in the content
+    const readingTime = Math.ceil(wordCount / wordsPerMinute); // Rounding up to nearest minute
+    return `${readingTime} min read`;
+  };
 
   const truncateContent = (content) => {
     const words = content.split(" ");
@@ -69,13 +69,7 @@ const calculateReadingTime = (content) => {
   const deleteArticle = (id) => {
     const updatedArticles = articles.filter((article) => article.id !== id);
     setArticles(updatedArticles);
-
-    // Update localStorage if the deleted article was newly added
-    const savedArticles = JSON.parse(localStorage.getItem("newArticles")) || [];
-    const updatedSavedArticles = savedArticles.filter(
-      (article) => article.id !== id
-    );
-    localStorage.setItem("newArticles", JSON.stringify(updatedSavedArticles));
+    localStorage.setItem("articles", JSON.stringify(updatedArticles));
   };
 
   const editArticle = (id) => {
@@ -133,11 +127,11 @@ const calculateReadingTime = (content) => {
         </div>
       ) : null}
 
-      <CreatedBlogs
+       {/* <CreatedBlogs
         isAuth={isAuth}
         editArticle={editArticle}
         deleteArticle={deleteArticle}
-      />
+      />  */}
 
       <h2 style={{ margin: "20px", fontSize: "x-large" }}>Most Popular...</h2>
       <div className="card-container">
@@ -166,7 +160,9 @@ const calculateReadingTime = (content) => {
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p className="card-date">{article.published_date}</p>
-                <p className="card-reading-time">{calculateReadingTime(article.content)}</p>
+                <p className="card-reading-time">
+                  {calculateReadingTime(article.content)}
+                </p>
               </div>
 
               {/* <p className="card-text">{truncateContent(article.content)}</p> */}
@@ -184,10 +180,10 @@ const calculateReadingTime = (content) => {
                 <div
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
-                  {localStorage.getItem("newArticles") &&
+                  {/* {localStorage.getItem("newArticles") &&
                   JSON.parse(localStorage.getItem("newArticles")).some(
                     (savedArticle) => savedArticle.id === article.id
-                  ) ? (
+                  ) ? ( */}
                     <>
                       <button
                         onClick={() => editArticle(article.id)}
@@ -214,7 +210,7 @@ const calculateReadingTime = (content) => {
                         />
                       </button>
                     </>
-                  ) : null}
+                  {/* ) : null} */}
                 </div>
               ) : null}
             </div>

@@ -23,9 +23,9 @@ export default function Allpost({newArticle}) {
 
   const handleUpdate = (article) => {
     setUpdatedArticle(article);
-    const savedArticles = JSON.parse(localStorage.getItem('newArticles')) || [];
+    const savedArticles = JSON.parse(localStorage.getItem('articles')) || [];
     const updatedArticles = savedArticles.map((a) => (a.id === article.id ? article : a));
-    localStorage.setItem('newArticles', JSON.stringify(updatedArticles));
+    localStorage.setItem('articles', JSON.stringify(updatedArticles));
   };
   return (
     <div className="allpost-container">

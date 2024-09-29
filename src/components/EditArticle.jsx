@@ -8,7 +8,7 @@ const EditArticle = ({ onUpdate }) => {
 
   useEffect(() => {
     // Fetch the article data from localStorage or the backend
-    const savedArticles = JSON.parse(localStorage.getItem('newArticles')) || [];
+    const savedArticles = JSON.parse(localStorage.getItem('articles')) || [];
     const existingArticle = savedArticles.find(article => article.id === parseInt(id));
     if (existingArticle) {
       setArticle(existingArticle);
@@ -27,7 +27,7 @@ const EditArticle = ({ onUpdate }) => {
   e.preventDefault();
 
   // Fetch the articles from localStorage
-  const savedArticles = JSON.parse(localStorage.getItem('newArticles')) || [];
+  const savedArticles = JSON.parse(localStorage.getItem('articles')) || [];
 
   // Find the index of the current article in the savedArticles array
   const articleIndex = savedArticles.findIndex(a => a.id === parseInt(id));
@@ -37,7 +37,7 @@ const EditArticle = ({ onUpdate }) => {
     savedArticles[articleIndex] = article;
 
     // Save the updated articles array back to localStorage
-    localStorage.setItem('newArticles', JSON.stringify(savedArticles));
+    localStorage.setItem('articles', JSON.stringify(savedArticles));
   }
 
   // Call the onUpdate function to update the state in the parent component (if needed)
