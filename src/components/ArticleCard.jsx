@@ -78,15 +78,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   return (
     <div>
-      {/* <button
-        type="button"
-        onClick={() => {
-          throw new Error("Sentry pherom Error");
-        }}
-      >
-        Break the world
-      </button> */}
-      {/* ; */}
+     
       <div
         style={{
           position: "relative",
@@ -120,7 +112,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         />
       </div>
       {isAuth ? (
-        <div style={{ padding: "10px 20px 10px 20px" }}>
+        <div style={{ marginLeft:"20px",maxWidth:"20%" }}>
           <Link style={{ textDecoration: "none",}} to="/create-blog">
             <button className="create-hover-button">
               <span>
