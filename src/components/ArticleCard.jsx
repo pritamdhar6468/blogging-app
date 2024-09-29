@@ -4,6 +4,7 @@ import "./ArticleCard.css";
 import { MdOutlineDelete } from "react-icons/md";
 import { IoCreateOutline } from "react-icons/io5";
 // import EditArticle from "./EditArticle";
+import CreatedBlogs from "./CreatedBlogs";
 
 import { CiEdit } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
@@ -41,7 +42,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         // Combine articles from localStorage with those from the JSON file
         const savedArticles =
           JSON.parse(localStorage.getItem("newArticles")) || [];
-        setArticles([...savedArticles, ...data]);
+        setArticles([ ...data]);
       })
       .catch((error) => console.error("Error fetching data:", error));
     // throw new Error("error fetching data")
@@ -50,6 +51,15 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
   const showMoreArticles = () => {
     setVisibleCount((prevCount) => prevCount + 6); // Show 6 more articles on each click
   };
+
+  // Helper function to calculate reading time
+const calculateReadingTime = (content) => {
+  const wordsPerMinute = 250; // Average reading speed
+  const wordCount = content.split(" ").length; // Counting words in the content
+  const readingTime = Math.ceil(wordCount / wordsPerMinute); // Rounding up to nearest minute
+  return `${readingTime} min read`;
+};
+
 
   const truncateContent = (content) => {
     const words = content.split(" ");
@@ -78,7 +88,6 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   return (
     <div>
-     
       <div
         style={{
           position: "relative",
@@ -112,8 +121,8 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         />
       </div>
       {isAuth ? (
-        <div style={{ marginLeft:"20px",maxWidth:"20%" }}>
-          <Link style={{ textDecoration: "none",}} to="/create-blog">
+        <div style={{ marginLeft: "20px", maxWidth: "20%" }}>
+          <Link style={{ textDecoration: "none" }} to="/create-blog">
             <button className="create-hover-button">
               <span>
                 <IoCreateOutline style={{ fontSize: "2.5rem" }} />
@@ -123,6 +132,13 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
           </Link>
         </div>
       ) : null}
+
+      <CreatedBlogs
+        isAuth={isAuth}
+        editArticle={editArticle}
+        deleteArticle={deleteArticle}
+      />
+
       <h2 style={{ margin: "20px", fontSize: "x-large" }}>Most Popular...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
@@ -150,7 +166,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <p className="card-date">{article.published_date}</p>
-                <p className="card-reading-time">{article.reading_time}</p>
+                <p className="card-reading-time">{calculateReadingTime(article.content)}</p>
               </div>
 
               {/* <p className="card-text">{truncateContent(article.content)}</p> */}

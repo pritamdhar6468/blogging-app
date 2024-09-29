@@ -363,6 +363,7 @@
 
 .create-blog form input[type="text"],
 .create-blog form input[type="url"],
+.create-blog form input[type="file"],
 .create-blog form textarea,
 .create-blog form select,
 .create-blog form select option,
@@ -374,7 +375,7 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 .input-tag {
   height: 70px;
