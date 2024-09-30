@@ -5,6 +5,9 @@ import { doc, getDoc } from "firebase/firestore";
 import "./ArticleCard.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FiEdit2 } from "react-icons/fi";
+import { BsSave } from "react-icons/bs";
 
 const ArticleDetails = ({ newArticle, isAuth }) => {
   const { id } = useParams();
@@ -12,6 +15,8 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
   const [userDetails, setUserDetails] = useState("");
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedText, setEditedText] = useState("");
 
   useEffect(() => {
     if (newArticle && newArticle.id === parseInt(id)) {
@@ -31,8 +36,7 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
 
   useEffect(() => {
     if (!article) {
-      const savedArticles =
-        JSON.parse(localStorage.getItem("articles")) || [];
+      const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
       const localArticle = savedArticles.find(
         (article) => article.id === parseInt(id)
       );
@@ -89,6 +93,37 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
     return <div>Loading...</div>;
   }
 
+  const handleDelete = (commentId) => {
+    // Filter out the comment that matches the id
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    );
+
+    // Update the state with the filtered comments
+    setComments(updatedComments);
+
+    // Update the localStorage with the new comments list
+    localStorage.setItem(`comments-${id}`, JSON.stringify(updatedComments));
+  };
+
+  const handleEdit = (commentId, text) => {
+    setEditingCommentId(commentId); // Set the ID of the comment being edited
+    setEditedText(text); // Set the current text of the comment
+  };
+
+  const handleSave = (commentId) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        return { ...comment, text: editedText }; // Update the text of the comment
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+    localStorage.setItem(`comments-${id}`, JSON.stringify(updatedComments));
+    setEditingCommentId(null); // Exit edit mode
+    setEditedText(""); // Clear the edited text input
+  };
+
   return (
     <>
       <Header isAuth={isAuth} />
@@ -118,7 +153,12 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
           comments.map((comment) => (
             <div key={comment.id} className="comment">
               <div
-                style={{ display: "flex", alignItems: "center", gap: "10px",paddingBottom:"10px" , }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  paddingBottom: "10px",
+                }}
               >
                 <div
                   // ref={profileRef}
@@ -149,8 +189,72 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
                   {userDetails.firstName} {userDetails.lastName}
                 </p>
               </div>
-              <p>{comment.text}</p>
+
+              {editingCommentId === comment.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editedText}
+                    onChange={(e) => setEditedText(e.target.value)}
+                    style={{ width: "100%", fontSize: "1.5rem" }}
+                  />
+                </>
+              ) : (
+                <p>{comment.text}</p>
+              )}
               <span>{comment.date}</span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row-reverse",
+                  gap: "10px",
+                  fontSize: "1.5rem",
+                }}
+              >
+                {editingCommentId === comment.id ? (
+                  <button
+                    style={{
+                      fontSize: "1.4rem",
+                      paddingLeft: "5px",
+                      paddingRight: "5px",
+                      background: "white",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleSave(comment.id)}
+                  >
+                    <BsSave style={{ fontSize: "1.7rem" }} />
+                  </button>
+                ) : (
+                  <button
+                    style={{
+                      fontSize: "1.4rem",
+                      paddingLeft: "5px",
+                      paddingRight: "5px",
+                      background: "white",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => handleEdit(comment.id, comment.text)}
+                  >
+                    <FiEdit2 style={{ fontSize: "1.9rem" }} />
+                  </button>
+                )}
+
+                <button
+                  style={{
+                    fontSize: "1.4rem",
+                    paddingLeft: "5px",
+                    paddingRight: "5px",
+                    background: "white",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleDelete(comment.id)}
+                >
+                  <RiDeleteBinLine style={{ fontSize: "1.9rem" }} />
+                </button>
+              </div>
             </div>
           ))
         ) : (
@@ -177,7 +281,6 @@ const ArticleDetails = ({ newArticle, isAuth }) => {
         ) : (
           <>
             <h2>You need to log in to make a comment</h2>
-           
           </>
         )}
       </div>

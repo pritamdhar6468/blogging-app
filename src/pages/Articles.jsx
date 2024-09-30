@@ -52,7 +52,7 @@ const Articles = ({ newArticle, isAuth, setIsAuth }) => {
       .then((data) => {
         // Combine articles from localStorage with those from the JSON file
         const savedArticles =
-          JSON.parse(localStorage.getItem("newArticles")) || [];
+          JSON.parse(localStorage.getItem("articles")) || [];
         setArticles([...savedArticles, ...data]);
       })
       .catch((error) => console.error("Error fetching data:", error));
