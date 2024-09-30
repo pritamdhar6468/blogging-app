@@ -115,7 +115,7 @@ const Profile = ({ isAuth }) => {
           </h2>
           <hr />
           <div className="profile-category">
-            <div className="profile-category-active">Home</div>
+            <div className="profile-category-active">Your Posts</div>
             {/* <div className="profile-category-active">About</div> */}
           </div>
           <div style={{height:"60%",overflowY:"scroll"}}>
