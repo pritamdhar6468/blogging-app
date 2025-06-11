@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 import Allpost from "./pages/Allpost";
 import ArticleDetails from "./components/ArticleDetails";
 import CreateBlog from "./pages/CreateBlog";

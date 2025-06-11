@@ -81,7 +81,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
 
   return (
     <div>
-      <div
+      <div className="create-search-section"
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -89,19 +89,20 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         }}
       >
         {isAuth ? (
-          <div style={{ marginLeft: "20px", maxWidth: "20%" }}>
-            <Link style={{ textDecoration: "none" }} to="/create-blog">
-              <button className="create-hover-button">
-                <span>
-                  <IoCreateOutline style={{ fontSize: "2.5rem" }} />
+          <div className="create-button">
+            <Link to="/create-blog" style={{ textDecoration: "none" }}>
+              <button className="create-hover-button" aria-label="Create new blog post">
+                <span aria-hidden="true">
+                  <IoCreateOutline style={{ fontSize: "1.7rem" }} />
                 </span>
-                <span style={{ fontSize: "2rem" }}>Create Blog</span>
+                <span>Create Blog</span>
               </button>
             </Link>
           </div>
         ) : null}
         
         <div
+          className="search-container"
           style={{
             position: "relative",
             margin: "20px",
@@ -119,7 +120,7 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
               border: "2px solid #C5D9E2",
               fontSize: "16px",
               // outline: "none",
-              width: "650px",
+              minWidth: "200px",
             }}
           />
           <CiSearch
@@ -141,23 +142,12 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
         deleteArticle={deleteArticle}
       />  */}
 
-      <h2 style={{ margin: "20px", fontSize: "x-large" }}>Most Popular...</h2>
+      <h2 style={{ margin: "20px", fontSize: "x-large" }}>Your Recent Blogs...</h2>
       <div className="card-container">
         {filteredArticles.slice(0, visibleCount).map((article) => (
           <div key={article.id} className="card">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="card-image"
-            />
-            <div className="card-content">
-              <Link
-                to={`/article/${article.id}`}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <h2 className="card-title">{article.title}</h2>
-              </Link>
-              <p className="card-category">{article.category}</p>
+            {/* Card Header - Author, Date, Tags, Reading Time */}
+            <div className="card-header">
               <div className="card-author">
                 <img
                   src={article.authorPic}
@@ -166,17 +156,12 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
                 />
                 <p>{article.author}</p>
               </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div className="card-meta">
                 <p className="card-date">{article.published_date}</p>
                 <p className="card-reading-time">
                   {calculateReadingTime(article.content)}
                 </p>
               </div>
-
-              {/* <p className="card-text">{truncateContent(article.content)}</p> */}
-              {/* <Link to={`/article/${article.id}`} className="read-more-link">
-                Read More
-              </Link> */}
               <div className="card-tags">
                 {article.tags.map((tag, index) => (
                   <span key={index} className="tag">
@@ -184,43 +169,63 @@ const ArticleCard = ({ newArticle, searchQuery, setSearchQuery, isAuth }) => {
                   </span>
                 ))}
               </div>
-              {isAuth ? (
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  {/* {localStorage.getItem("newArticles") &&
-                  JSON.parse(localStorage.getItem("newArticles")).some(
-                    (savedArticle) => savedArticle.id === article.id
-                  ) ? ( */}
-                  <>
+            </div>
+
+            {/* Image Container with Read More Arrow and Three Dots Menu */}
+            <div className="card-image-container">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="card-image"
+              />
+              
+              {/* Read More Arrow */}
+              <Link to={`/article/${article.id}`} className="read-more-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+
+              {/* Three Dots Menu */}
+              {isAuth && (
+                <div className="three-dots-menu">
+                  <button className="three-dots-button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" fill="currentColor"/>
+                      <path d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z" fill="currentColor"/>
+                      <path d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div className="dropdown-menu">
                     <button
                       onClick={() => editArticle(article.id)}
-                      className="edit-button"
+                      className="dropdown-item edit-item"
                     >
-                      <CiEdit
-                        style={{
-                          fontSize: "20px",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      />
+                      <CiEdit />
+                      <span>Edit</span>
                     </button>
                     <button
                       onClick={() => deleteArticle(article.id)}
-                      className="delete-button"
+                      className="dropdown-item delete-item"
                     >
-                      <MdOutlineDelete
-                        style={{
-                          fontSize: "20px",
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      />
+                      <MdOutlineDelete />
+                      <span>Delete</span>
                     </button>
-                  </>
-                  {/* ) : null} */}
+                  </div>
                 </div>
-              ) : null}
+              )}
+            </div>
+
+            {/* Card Content */}
+            <div className="card-content">
+              <Link
+                to={`/article/${article.id}`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <h2 className="card-title">{article.title}</h2>
+              </Link>
+              <p className="card-category">{article.category}</p>
+              <p className="card-text">{truncateContent(article.content)}</p>
             </div>
           </div>
         ))}

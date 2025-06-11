@@ -139,9 +139,9 @@ export default function Header({ isAuth, setIsAuth }) {
         justifyContent: "space-between",
         alignItems: "center",
         height: "70px",
-        background: "#fafafa",
+        background: "#e9ecef",
         color: "white",
-        boxShadow: `0 4px 8px rgba(0, 0, 0, 0.1)`,
+        // boxShadow: `0 4px 8px rgba(0, 0, 0, 0.1)`,
       }}
     >
       <div style={{ display: "flex", gap: "20px" }}>
@@ -149,7 +149,7 @@ export default function Header({ isAuth, setIsAuth }) {
           style={{
             fontSize: "3.2rem",
             fontWeight: "bolder",
-            color: "#183446",
+            color: "#4361ee",
           }}
         >
           Blogify
@@ -171,7 +171,7 @@ export default function Header({ isAuth, setIsAuth }) {
             className="home-link"
             style={{
               padding: "6px",
-              fontSize: "1.5rem",
+              fontSize: "1.8rem",
 
               // borderRadius: "5px",
               // background: "#f9f9f9",
@@ -188,7 +188,7 @@ export default function Header({ isAuth, setIsAuth }) {
           className="blogs-link"
             style={{
               padding: "5px",
-              fontSize: "1.5rem",
+              fontSize: "1.8rem",
 
               // borderRadius: "5px",
               // background: "#f9f9f9",
@@ -271,7 +271,7 @@ export default function Header({ isAuth, setIsAuth }) {
           style={{ textDecoration: "none", color: "black" }}
           onClick={handleCreateBlogClick}
         >
-          <div className="createblog-link" style={{ padding: "5px", fontSize: "1.5rem" }}>Create Blog</div>
+          <div className="createblog-link" style={{ padding: "5px", fontSize: "1.8rem" }}>Create Blog</div>
         </Link>
 
         {isAuth ? (
@@ -335,27 +335,44 @@ export default function Header({ isAuth, setIsAuth }) {
               ref={dropdownRef} // Assign ref to the dropdown div
               style={{
                 position: "absolute",
-                top: "50px",
-                right: "40px",
-                backgroundColor: "#ffffff",
-                color: "#183446",
-                borderRadius: "5px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                padding: "15px",
+                top: "60px",
+                right: "50px",
+                backgroundColor: "rgba(255, 255, 255, 0.95)",
+                color: "#4361ee",
+                borderRadius: "16px",
+                boxShadow: "0 8px 32px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(67, 97, 238, 0.1)",
+                padding: "1.5rem",
                 zIndex: "1001",
                 textAlign: "center",
                 opacity: dropDown ? 1 : 0, // Controls visibility
                 transform: dropDown ? "translateY(0)" : "translateY(-10px)", // Controls slide effect
-                transition: "opacity 0.5s ease, transform 0.5s ease", // Smooth transition
+                transition: "opacity 0.3s ease, transform 0.3s ease", // Smooth transition
                 pointerEvents: dropDown ? "auto" : "none", // Disable clicks when hidden
+                width: "260px",
+                minWidth: "260px",
+                backdropFilter: "blur(10px)",
+                border: "1px solid rgba(255, 255, 255, 0.2)",
               }}
             >
               {userDetails ? (
-                <p style={{ fontSize: "1.3rem", margin: 0 }}>
-                  Welcome, {userDetails.firstName}!
+                <p style={{ 
+                  fontSize: "1.5rem", 
+                  margin: "0 0 1.5rem 0", 
+                  fontWeight: "600",
+                  color: "#4361ee",
+                  borderBottom: "1px solid rgba(67, 97, 238, 0.2)",
+                  paddingBottom: "0.75rem"
+                }}>
+                  Welcome, {userDetails.firstName}! 👋
                 </p>
               ) : (
-                <p style={{ fontSize: "1.6rem" }}>Loading...</p>
+                <p style={{ 
+                  fontSize: "1.5rem", 
+                  margin: "0 0 1.5rem 0",
+                  color: "#4361ee",
+                  borderBottom: "1px solid rgba(67, 97, 238, 0.2)",
+                  paddingBottom: "0.75rem"
+                }}>Loading...</p>
               )}
 
               <Link
@@ -366,47 +383,49 @@ export default function Header({ isAuth, setIsAuth }) {
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    padding: "8px",
-                    background: "white",
-                    color: "black",
-                    // width:"100px",
-                    marginTop: "5px",
-
-                    border: "none",
-                    borderRadius: "5px",
-                    // fontSize: "1.5rem",
+                    alignItems: "center",
+                    padding: "0.875rem 1rem",
+                    background: "linear-gradient(135deg, rgba(67, 97, 238, 0.1), rgba(67, 97, 238, 0.05))",
+                    color: "#4361ee",
+                    marginTop: "0.5rem",
+                    border: "1px solid rgba(67, 97, 238, 0.2)",
+                    borderRadius: "12px",
                     cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    width: "100%",
+                    fontWeight: "500",
                   }}
                 >
                   <CgProfile
-                    style={{ fontSize: "2.2rem", marginRight: "10px" }}
+                    style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}
                   />
-                  <span style={{ fontSize: "1.4rem" }}>Profile</span>
+                  <span style={{ fontSize: "1.5rem" }}>Profile</span>
                 </div>
               </Link>
 
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", marginTop: "0.75rem" }}>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    padding: "8px",
-                    background: "#ed3b2b",
+                    alignItems: "center",
+                    padding: "0.875rem 1rem",
+                    background: "linear-gradient(135deg, #f44336, #d32f2f)",
                     color: "white",
-                    // width:"100px",
-                    marginTop: "5px",
-                    marginLeft: "7px",
                     border: "none",
-                    borderRadius: "5px",
-                    // fontSize: "1.5rem",
+                    borderRadius: "12px",
                     cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    width: "100%",
+                    fontWeight: "500",
+                    boxShadow: "0 4px 12px rgba(244, 67, 54, 0.3)",
                   }}
                   onClick={openLogoutModal}
                 >
                   <IoLogOutOutline
-                    style={{ fontSize: "1.8rem", marginRight: "10px" }}
-                  />{" "}
-                  <span style={{ fontSize: "1.2rem" }}>Logout</span>
+                    style={{ fontSize: "1.8rem", marginRight: "0.75rem" }}
+                  />
+                  <span style={{ fontSize: "1.5rem" }}>Logout</span>
                 </div>
               </div>
             </div>
@@ -424,46 +443,61 @@ export default function Header({ isAuth, setIsAuth }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            backgroundColor: "black",
-            padding: "20px",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            borderRadius: "10px",
+            backgroundColor: "rgba(255, 255, 255, 0.95)",
+            padding: "2rem",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(67, 97, 238, 0.1)",
+            borderRadius: "16px",
             zIndex: "1002",
             textAlign: "center",
+            backdropFilter: "blur(10px)",
+            border: "1px solid rgba(255, 255, 255, 0.2)",
+            minWidth: "320px",
           }}
         >
-          <p style={{ fontSize: "1.5rem", marginBottom: "15px",color:"white" }}>
+          <p style={{ 
+            fontSize: "1.6rem", 
+            marginBottom: "1.5rem", 
+            color: "#4361ee", 
+            fontWeight: "600",
+            lineHeight: "1.4"
+          }}>
             Are you sure you want to logout?
           </p>
-          <button
-            style={{
-              marginRight: "10px",
-              padding: "10px",
-              background: "#ed3b2b",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize:"1.3rem"
-            }}
-            onClick={confirmLogout}
-          >
-            Yes
-          </button>
-          <button
-            style={{
-              padding: "10px",
-              background: "grey",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              fontSize:"1.3rem"
-            }}
-            onClick={closeLogoutModal}
-          >
-            No
-          </button>
+          <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
+            <button
+              style={{
+                padding: "0.75rem 1.5rem",
+                background: "linear-gradient(135deg, #f44336, #d32f2f)",
+                color: "white",
+                border: "none",
+                borderRadius: "25px",
+                cursor: "pointer",
+                fontSize: "1.3rem",
+                fontWeight: "600",
+                transition: "all 0.3s ease",
+                boxShadow: "0 4px 12px rgba(244, 67, 54, 0.3)",
+              }}
+              onClick={confirmLogout}
+            >
+              Yes, Logout
+            </button>
+            <button
+              style={{
+                padding: "0.75rem 1.5rem",
+                background: "rgba(156, 163, 175, 0.2)",
+                color: "#6b7280",
+                border: "1px solid rgba(156, 163, 175, 0.3)",
+                borderRadius: "25px",
+                cursor: "pointer",
+                fontSize: "1.3rem",
+                fontWeight: "600",
+                transition: "all 0.3s ease",
+              }}
+              onClick={closeLogoutModal}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
       
